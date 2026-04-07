@@ -337,7 +337,9 @@ export default function Page() {
           </div>
           <div className="nav-links">
             <a href="https://itechsmart.dev" target="_blank" className="nav-link">Platform</a>
+            <a href="https://itechsmart.dev/proof" target="_blank" className="nav-link">Proof</a>
             <a href="https://itechsmart.dev/whitepaper" target="_blank" className="nav-link">Whitepaper</a>
+            <a href="https://itechsmart.dev/start" target="_blank" className="nav-try" style={{padding:"8px 18px",fontSize:13,fontWeight:700,borderRadius:8,border:`1px solid ${B.purple}55`,background:`${B.purple}14`,color:B.purple,textDecoration:"none",fontFamily:"Inter"}}>Start Here</a>
             <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g nav-try" style={{padding:"8px 18px",fontSize:13,boxShadow:`0 0 22px ${B.purple}44`}}>Try Free →</a>
           </div>
         </nav>
@@ -457,7 +459,7 @@ export default function Page() {
 
             <div className="hero-ctas">
               <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g">Run Free Production Scan → See What YOUR Infrastructure Would Fix Automatically (No Setup • Results in Minutes)</a>
-              <a href="https://itechsmart.dev/contact" target="_blank" className="cta2">Book a Live Demo</a>
+              <a href="https://docs.itechsmart.dev/demo" target="_blank" className="cta2">Watch Demo</a>
             </div>
             <div style={{fontSize:12,color:B.dim,fontFamily:"Inter",marginTop:10,marginBottom:20,letterSpacing:".02em"}}>
               No setup · No risk · Results in 2 minutes
@@ -803,8 +805,9 @@ export default function Page() {
                 Try iTechSmart free or book a live walkthrough. See autonomous IT operations. Verify the proof yourself.
               </p>
               <div className="hero-ctas">
-                <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g" style={{fontSize:17,padding:"18px 48px"}}>Run Free Scan</a>
-                <a href="https://itechsmart.dev/contact" target="_blank" className="cta2" style={{fontSize:17,padding:"18px 36px"}}>Watch Demo</a>
+                <a href="https://itechsmart.dev/start" target="_blank" className="cta1 cta-g" style={{fontSize:17,padding:"18px 48px"}}>Start Here →</a>
+                <a href="https://itechsmart.dev/pulse" target="_blank" className="cta2" style={{fontSize:17,padding:"18px 36px"}}>Run Free Scan</a>
+                <a href="https://docs.itechsmart.dev/demo" target="_blank" className="cta2" style={{fontSize:17,padding:"18px 36px"}}>Watch Demo</a>
                 <a href="https://whitepaper.itechsmart.dev" target="_blank" className="cta2" style={{fontSize:17,padding:"18px 32px"}}>Download Whitepaper</a>
               </div>
               <div style={{marginTop:64,paddingTop:48,borderTop:`1px solid ${B.border}`}}>
