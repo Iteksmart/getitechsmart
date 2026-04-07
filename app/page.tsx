@@ -50,13 +50,14 @@ function Typewriter({lines}:{lines:string[]}) {
 
 function UaioLoop() {
   const [a,setA]=useState(0);
-  useEffect(()=>{ const t=setInterval(()=>setA(x=>(x+1)%5),1100); return()=>clearInterval(t); },[]);
+  useEffect(()=>{ const t=setInterval(()=>setA(x=>(x+1)%6),1000); return()=>clearInterval(t); },[]);
   const steps=[
     {icon:"📡",label:"DETECT",   color:B.blue},
     {icon:"🌐",label:"SIMULATE", color:B.purple},
     {icon:"🧠",label:"DECIDE",   color:"#a855f7"},
     {icon:"⚡",label:"FIX",      color:B.teal},
-    {icon:"🔐",label:"PROVE",    color:B.green},
+    {icon:"✓", label:"VERIFY",   color:"#4ade80"},
+    {icon:"🔐",label:"RECEIPT",  color:B.green},
   ];
   return(
     <div className="uaio-loop">
@@ -71,7 +72,7 @@ function UaioLoop() {
             <span style={{fontSize:20}}>{s.icon}</span>
             <span className="uaio-label" style={{color:a===i?s.color:B.dim}}>{s.label}</span>
           </div>
-          {i<4&&<div className="uaio-connector" style={{background:a>i?B.purple:"rgba(255,255,255,0.07)"}}/>}
+          {i<5&&<div className="uaio-connector" style={{background:a>i?B.purple:"rgba(255,255,255,0.07)"}}/>}
         </div>
       ))}
     </div>
@@ -99,6 +100,31 @@ function ProofWidget() {
           CRYPTOGRAPHICALLY SEALED · itechsmart.dev/verify
         </div>
       </div>
+    </div>
+  );
+}
+
+function LiveFeed() {
+  const events=[
+    {fix:"Container outage",time:"18s",hash:"a3f9b2c1"},
+    {fix:"Disk pressure (8% free)",time:"14s",hash:"b7d2f4a1"},
+    {fix:"Failed health check",time:"20s",hash:"f0b71cc0"},
+    {fix:"Memory leak detected",time:"22s",hash:"d4f1b8c2"},
+    {fix:"Slow query killed",time:"11s",hash:"e5a2c7d8"},
+    {fix:"Service restart loop",time:"19s",hash:"c3e8a2d5"},
+  ];
+  const [i,setI]=useState(0);
+  useEffect(()=>{ const t=setInterval(()=>setI(x=>(x+1)%events.length),3200); return()=>clearInterval(t); },[events.length]);
+  const e=events[i];
+  return(
+    <div style={{display:"inline-flex",alignItems:"center",gap:14,padding:"10px 20px",borderRadius:100,border:`1px solid ${B.green}33`,background:`${B.green}0a`,fontFamily:"Inter",maxWidth:"100%",flexWrap:"wrap",justifyContent:"center"}}>
+      <span style={{display:"flex",alignItems:"center",gap:6}}>
+        <span style={{width:7,height:7,borderRadius:"50%",background:B.green,boxShadow:`0 0 8px ${B.green}`,animation:"pulse-g 2s infinite"}}/>
+        <span style={{fontSize:10,fontWeight:800,color:B.green,letterSpacing:".14em",textTransform:"uppercase"}}>Latest autonomous fix</span>
+      </span>
+      <span key={i} style={{fontSize:13,color:"#fff",fontWeight:600,animation:"fadeIn 0.6s ease"}}>
+        {e.fix} <span style={{color:B.dim}}>→</span> resolved in <span style={{color:"#4ade80",fontWeight:800}}>{e.time}</span> <span style={{color:B.dim}}>→</span> receipt <span style={{color:B.purple,fontFamily:"monospace",fontSize:12}}>{e.hash}</span>
+      </span>
     </div>
   );
 }
@@ -143,6 +169,7 @@ export default function Page() {
 
         /* ── ANIMATIONS ── */
         @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
         @keyframes pulse-g{0%,100%{box-shadow:0 0 10px #22c55e}50%{box-shadow:0 0 22px #22c55e,0 0 44px #22c55e44}}
         @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
         @keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
@@ -161,7 +188,7 @@ export default function Page() {
         .h2{font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:900;letter-spacing:-.035em;color:#fff;margin:0 0 20px;font-family:Inter;line-height:1.08}
         .body-text{font-size:16px;color:${B.muted};line-height:1.72;font-family:Inter}
         .card{padding:24px 20px;border-radius:18px;border:1px solid ${B.border};background:${B.surface};font-family:Inter}
-        .cta1{padding:15px 32px;border-radius:12px;background:linear-gradient(135deg,${B.purple},${B.blue});color:#fff;font-size:15px;font-weight:800;text-decoration:none;display:inline-block;box-shadow:0 0 48px ${B.purple}44;font-family:Inter;letter-spacing:-.01em}
+        .cta1{padding:15px 28px;border-radius:12px;background:linear-gradient(135deg,${B.purple},${B.blue});color:#fff;font-size:14px;font-weight:800;text-decoration:none;display:inline-block;box-shadow:0 0 48px ${B.purple}44;font-family:Inter;letter-spacing:-.01em;line-height:1.35;text-align:center;max-width:520px}
         .cta2{padding:15px 28px;border-radius:12px;border:1px solid ${B.border};color:rgba(255,255,255,.72);font-size:15px;font-weight:600;text-decoration:none;display:inline-block;font-family:Inter}
 
         /* ── NAV ── */
@@ -230,6 +257,8 @@ export default function Page() {
            MOBILE  (≤ 768px)
         ════════════════════════════════════════ */
         @media(max-width:768px){
+          /* Before/After */
+          .ba-grid{grid-template-columns:1fr!important;gap:14px!important}
           /* Nav */
           .nav{padding:0 16px;height:56px}
           .nav-link:not(.nav-try){display:none}
@@ -309,7 +338,7 @@ export default function Page() {
           <div className="nav-links">
             <a href="https://itechsmart.dev" target="_blank" className="nav-link">Platform</a>
             <a href="https://itechsmart.dev/whitepaper" target="_blank" className="nav-link">Whitepaper</a>
-            <a href="https://pulse.itechsmart.dev" target="_blank" className="cta1 cta-g nav-try" style={{padding:"8px 18px",fontSize:13,boxShadow:`0 0 22px ${B.purple}44`}}>Try Free →</a>
+            <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g nav-try" style={{padding:"8px 18px",fontSize:13,boxShadow:`0 0 22px ${B.purple}44`}}>Try Free →</a>
           </div>
         </nav>
 
@@ -317,9 +346,18 @@ export default function Page() {
         <section className="hero">
           <div style={{position:"absolute",top:"12%",left:"50%",transform:"translateX(-50%)",width:"90vw",height:"60vh",background:`radial-gradient(ellipse,${B.purple}14 0%,transparent 68%)`,pointerEvents:"none"}}/>
           <div className="wrap hero-content">
-            <div className="live-badge">
-              <div style={{width:7,height:7,borderRadius:"50%",background:B.green,boxShadow:`0 0 9px ${B.green}`,animation:"pulse-g 2s infinite",flexShrink:0}}/>
-              <span className="live-text">131 containers live · 20s self-heal · zero human intervention</span>
+            <div style={{display:"inline-flex",flexDirection:"column",alignItems:"center",gap:6,padding:"10px 20px",borderRadius:14,border:`1px solid ${B.green}33`,background:`${B.green}0a`,marginBottom:24}}>
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
+                <div style={{width:7,height:7,borderRadius:"50%",background:B.green,boxShadow:`0 0 10px ${B.green}`,animation:"pulse-g 2s infinite"}}/>
+                <span style={{fontSize:10,fontWeight:900,color:B.green,letterSpacing:".18em",textTransform:"uppercase",fontFamily:"Inter"}}>Live System Status: Active</span>
+              </div>
+              <span style={{fontSize:11,color:"rgba(255,255,255,.7)",fontFamily:"Inter",fontWeight:500,letterSpacing:".02em"}}>
+                Monitoring 131 containers across 84 services — right now
+              </span>
+            </div>
+
+            <div style={{fontSize:12,color:B.muted,fontFamily:"Inter",fontWeight:600,marginBottom:24,letterSpacing:".02em"}}>
+              Analyzing infrastructure like yours · <span style={{color:B.purple}}>Kubernetes</span> · <span style={{color:B.blue}}>Cloud</span> · <span style={{color:B.teal}}>Hybrid</span> environments
             </div>
 
             <h1 className="hero-h1">
@@ -332,12 +370,103 @@ export default function Page() {
             </h1>
 
             <p className="hero-sub">
-              iTechSmart uses <strong style={{color:"#fff",fontWeight:800}}>Nemotron 49B AI</strong> to detect, simulate, fix, and cryptographically prove IT issues — automatically, before they touch your business.
+              AI that automatically fixes production IT issues — and proves it to your auditors. Built for healthcare systems, MSPs, and enterprise IT teams.
             </p>
 
+            <div style={{maxWidth:620,margin:"0 auto 30px"}}>
+              <p style={{fontSize:"clamp(1rem,2vw,1.18rem)",color:"#fff",fontFamily:"Inter",fontWeight:700,lineHeight:1.5,letterSpacing:"-.01em",marginBottom:6}}>
+                Right now, your system is waiting for a human to fix the next outage.
+              </p>
+              <p style={{fontSize:"clamp(.95rem,1.8vw,1.05rem)",color:B.muted,fontFamily:"Inter",fontWeight:500,lineHeight:1.5}}>
+                That&apos;s the risk. <span style={{color:B.purple,fontWeight:800}}>We removed it.</span>
+              </p>
+            </div>
+
+            <div style={{maxWidth:600,margin:"0 auto 28px",padding:"18px 24px",borderRadius:12,border:`1px solid ${B.green}33`,background:`${B.green}0c`,textAlign:"center"}}>
+              <div style={{fontSize:14,fontWeight:700,color:"#fff",fontFamily:"Inter",lineHeight:1.6}}>
+                Downtime costs <span style={{color:"#4ade80"}}>~$5,600 per minute</span>.
+              </div>
+              <div style={{fontSize:14,fontWeight:700,color:"#fff",fontFamily:"Inter",lineHeight:1.6}}>
+                Most incidents take <span style={{color:"#4ade80"}}>45–90 minutes</span>.
+              </div>
+              <div style={{fontSize:14,fontWeight:800,color:"#4ade80",fontFamily:"Inter",lineHeight:1.6,marginTop:4}}>
+                We resolve them in ~20 seconds.
+              </div>
+              <div style={{fontSize:12,color:B.muted,fontFamily:"Inter",marginTop:10,paddingTop:10,borderTop:"1px solid rgba(255,255,255,.06)",fontStyle:"italic",lineHeight:1.5}}>
+                Every unresolved incident costs time, money, and trust.
+              </div>
+            </div>
+
+            <div style={{maxWidth:600,margin:"0 auto 24px",textAlign:"center"}}>
+              <div style={{fontSize:11,fontWeight:800,color:B.dim,letterSpacing:".14em",textTransform:"uppercase",fontFamily:"Inter",marginBottom:10}}>Built for</div>
+              <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center"}}>
+                {[
+                  "MSPs managing 100–10,000 endpoints",
+                  "Enterprise IT teams under SLA pressure",
+                  "Healthcare & regulated environments",
+                ].map(t=>(
+                  <span key={t} style={{padding:"6px 14px",borderRadius:100,border:`1px solid ${B.border}`,background:`${B.purple}0c`,fontSize:12,fontWeight:600,color:"rgba(255,255,255,.78)",fontFamily:"Inter"}}>{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <div style={{maxWidth:600,margin:"0 auto 24px",padding:"14px 22px",borderRadius:12,border:`1px solid ${B.purple}33`,background:`${B.purple}0a`,textAlign:"center"}}>
+              <div style={{fontSize:14,fontWeight:800,color:"#fff",fontFamily:"Inter",lineHeight:1.5,letterSpacing:"-.01em"}}>
+                <span style={{color:B.purple}}>No rip and replace.</span> Works with your existing stack.
+              </div>
+              <div style={{fontSize:12,color:B.muted,fontFamily:"Inter",marginTop:4,lineHeight:1.5}}>
+                Layers on top of ServiceNow, Jira, Splunk, Datadog, AWS, Azure — no migration required.
+              </div>
+            </div>
+
+            <div style={{maxWidth:600,margin:"0 auto 18px",textAlign:"center"}}>
+              <div style={{fontSize:14,fontWeight:800,color:"#fff",fontFamily:"Inter",letterSpacing:"-.01em"}}>
+                Live in minutes. <span style={{color:B.teal}}>Value in the first incident.</span>
+              </div>
+            </div>
+
+            <div style={{maxWidth:600,margin:"0 auto 18px",textAlign:"center"}}>
+              <div style={{fontSize:12,color:B.muted,fontFamily:"Inter",fontWeight:600,letterSpacing:".06em",textTransform:"uppercase"}}>
+                This is how modern IT teams operate.
+              </div>
+            </div>
+
+            <div style={{maxWidth:600,margin:"0 auto 18px",textAlign:"center"}}>
+              <div style={{fontSize:"clamp(1.05rem,2.2vw,1.35rem)",color:"#fff",fontFamily:"Inter",fontWeight:800,letterSpacing:"-.02em",lineHeight:1.4}}>
+                If your infrastructure could fix itself — <span style={{color:B.purple}}>would you let it?</span>
+              </div>
+            </div>
+
+            <div style={{maxWidth:600,margin:"0 auto 16px",textAlign:"center"}}>
+              <div style={{fontSize:13,color:B.muted,fontFamily:"Inter",fontWeight:600,marginBottom:8}}>
+                Want to see how your system behaves?
+              </div>
+              <a href="https://itechsmart.dev/pulse" target="_blank" style={{display:"inline-block",padding:"7px 18px",borderRadius:100,border:`1px solid ${B.purple}55`,background:`${B.purple}10`,color:B.purple,fontSize:12,fontWeight:800,fontFamily:"Inter",textDecoration:"none",letterSpacing:".02em"}}>
+                ✓ Yes — Show Me
+              </a>
+            </div>
+
+            <div style={{maxWidth:600,margin:"0 auto 16px",textAlign:"center"}}>
+              <div style={{fontSize:13,color:"#4ade80",fontFamily:"Inter",fontWeight:700,letterSpacing:"-.01em"}}>
+                See your first autonomous fix in minutes.
+              </div>
+              <div style={{fontSize:11,color:B.dim,fontFamily:"Inter",marginTop:4,letterSpacing:".02em"}}>
+                No setup. No risk. Nothing to install.
+              </div>
+            </div>
+
             <div className="hero-ctas">
-              <a href="https://pulse.itechsmart.dev" target="_blank" className="cta1 cta-g">👉 Try It Free — 2 Min Setup</a>
+              <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g">Run Free Production Scan → See What YOUR Infrastructure Would Fix Automatically (No Setup • Results in Minutes)</a>
               <a href="https://itechsmart.dev/contact" target="_blank" className="cta2">Book a Live Demo</a>
+            </div>
+            <div style={{fontSize:12,color:B.dim,fontFamily:"Inter",marginTop:10,marginBottom:20,letterSpacing:".02em"}}>
+              No setup · No risk · Results in 2 minutes
+            </div>
+            <div style={{fontSize:12,color:B.muted,fontFamily:"Inter",marginBottom:14,fontStyle:"italic",lineHeight:1.6}}>
+              Designed with NIST &amp; Zero Trust principles · SDVOSB · F6S #6 globally
+            </div>
+            <div style={{fontSize:11,color:"#f59e0b",fontFamily:"Inter",fontWeight:700,marginBottom:36,letterSpacing:".04em"}}>
+              ⚠ Early access environments filling for enterprise pilots
             </div>
 
             <div className="stats-grid">
@@ -353,6 +482,14 @@ export default function Page() {
               <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",color:B.dim,marginBottom:16,fontFamily:"Inter"}}>UAIO Autonomous Loop — Running Live</div>
               <UaioLoop/>
             </div>
+
+            <div style={{marginTop:36,display:"flex",justifyContent:"center"}}>
+              <LiveFeed/>
+            </div>
+
+            <div style={{marginTop:24,fontSize:12,color:B.dim,fontFamily:"Inter",letterSpacing:".06em",textTransform:"uppercase",fontWeight:700}}>
+              See how it works ↓
+            </div>
           </div>
         </section>
 
@@ -366,6 +503,32 @@ export default function Page() {
                 <LiveCounter end={88}      suffix="/88"  label="Prometheus targets UP"/>
                 <LiveCounter end={96}      suffix="%"   label="NIST CSF score"/>
                 <LiveCounter end={2000000} suffix="+"   label="AI startups ranked above (F6S #6)"/>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* CLOSED LOOP */}
+        <section className="section">
+          <div className="wrap">
+            <Reveal>
+              <div style={{textAlign:"center",marginBottom:36}}>
+                <div className="eyebrow" style={{color:B.purple}}>♾ The Autonomous Loop</div>
+                <h2 className="h2" style={{textAlign:"center"}}>A complete autonomous loop. <span style={{color:B.purple}}>No gaps. No handoffs.</span></h2>
+                <p className="body-text" style={{maxWidth:600,margin:"16px auto 0",textAlign:"center"}}>
+                  Every phase runs autonomously. Humans set policy — the loop handles execution.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={.1}>
+              <div style={{padding:"32px 20px",borderRadius:18,border:`1px solid ${B.border}`,background:`${B.purple}05`,maxWidth:920,margin:"0 auto"}}>
+                <UaioLoop/>
+                <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:8,marginTop:24,fontSize:12,color:B.muted,fontFamily:"Inter"}}>
+                  <span style={{color:"#4ade80",fontWeight:800}}>✓</span>
+                  <span>Production-tested across real infrastructure scenarios</span>
+                  <span style={{color:B.dim}}>·</span>
+                  <span>Designed for NIST-aligned environments</span>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -414,7 +577,7 @@ export default function Page() {
               {[
                 {n:"01",icon:"📡",t:"Detect",   d:"Real-time signals from servers, containers, and endpoints.",c:B.blue},
                 {n:"02",icon:"🌐",t:"Simulate", d:"Digital Twin models the fix before anything executes.",c:B.purple},
-                {n:"03",icon:"🧠",t:"Decide",   d:"Nemotron 49B reasons root cause. Explainable AI.",c:"#a855f7"},
+                {n:"03",icon:"🧠",t:"Decide",   d:"AI reasons root cause with full explainability.",c:"#a855f7"},
                 {n:"04",icon:"⚡",t:"Fix",      d:"Autonomous remediation across any endpoint.",c:B.teal},
                 {n:"05",icon:"🔐",t:"Prove",    d:"SHA-256 ProofLink receipt. Tamper-evident.",c:B.green},
               ].map((s,i)=>(
@@ -440,22 +603,108 @@ export default function Page() {
         {/* PROOF */}
         <section className="section">
           <div className="wrap">
+            <div style={{textAlign:"center",marginBottom:32,fontSize:12,color:B.dim,fontFamily:"Inter",letterSpacing:".06em",textTransform:"uppercase",fontWeight:700}}>
+              Watch the fix happen ↓
+            </div>
             <div className="two-col">
               <Reveal>
                 <div className="eyebrow" style={{color:B.green}}>🔐 Cryptographic Proof</div>
                 <h2 className="h2">Don't Trust AI.<br/><span style={{color:"#4ade80"}}>Verify It.</span></h2>
                 <p className="body-text" style={{marginBottom:20}}>Every action generates a SHA-256 tamper-proof receipt. Prove to any auditor what happened, why, and what was done — with a public verify URL.</p>
-                <div style={{padding:"14px 16px",borderRadius:12,border:"1px solid rgba(34,197,94,.2)",background:"rgba(34,197,94,.06)",marginBottom:24}}>
+                <div style={{padding:"14px 16px",borderRadius:12,border:"1px solid rgba(34,197,94,.2)",background:"rgba(34,197,94,.06)",marginBottom:16}}>
                   <div style={{fontSize:11,color:B.green,fontWeight:800,marginBottom:4,fontFamily:"Inter"}}>PROVEN LIVE — April 5 2026</div>
                   <div style={{fontSize:14,color:"#fff",fontFamily:"Inter",fontWeight:600,lineHeight:1.5}}>suite-itsm killed → detected 10s → recovered 20s → zero human input</div>
                 </div>
+                <div style={{padding:"14px 16px",borderRadius:12,border:"1px solid rgba(255,255,255,.08)",background:"rgba(255,255,255,.03)",marginBottom:16}}>
+                  <div style={{fontSize:14,color:"#fff",fontFamily:"Inter",fontWeight:600,lineHeight:1.55}}>That 20 seconds isn&apos;t just fast.</div>
+                  <div style={{fontSize:13,color:B.muted,fontFamily:"Inter",lineHeight:1.6,marginTop:4}}>It&apos;s the difference between a minor event and a major outage.</div>
+                </div>
+                <p style={{fontSize:13,color:B.dim,fontFamily:"Inter",fontStyle:"italic",marginBottom:20,lineHeight:1.6}}>This is what auditors, security teams, and executives rely on.</p>
                 <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
                   <a href="https://verify.itechsmart.dev" target="_blank" className="cta-g" style={{padding:"11px 20px",borderRadius:10,background:"rgba(34,197,94,.12)",border:"1px solid rgba(34,197,94,.35)",color:"#4ade80",fontWeight:700,fontSize:14,textDecoration:"none",fontFamily:"Inter"}}>Verify a Receipt →</a>
                   <a href="https://proof-library.itechsmart.dev" target="_blank" className="cta2" style={{padding:"11px 18px",fontSize:14}}>View Proof Library →</a>
+                  <a href="https://whitepaper.itechsmart.dev" target="_blank" className="cta2" style={{padding:"11px 18px",fontSize:14}}>Read the Architecture Whitepaper →</a>
                 </div>
               </Reveal>
               <ProofWidget/>
             </div>
+          </div>
+        </section>
+
+        {/* BEFORE / AFTER TRANSFORMATION */}
+        <section className="section">
+          <div className="wrap">
+            <div style={{textAlign:"center",marginBottom:32,display:"flex",justifyContent:"center"}}>
+              <LiveFeed/>
+            </div>
+            <Reveal>
+              <div style={{textAlign:"center",marginBottom:44}}>
+                <div className="eyebrow" style={{color:B.purple}}>⚡ The Hard Contrast</div>
+                <h2 className="h2" style={{textAlign:"center"}}>Traditional IT Ops vs iTechSmart UAIO</h2>
+              </div>
+            </Reveal>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24,maxWidth:880,margin:"0 auto"}} className="ba-grid">
+              <Reveal>
+                <div style={{padding:"28px 26px",borderRadius:18,border:"1px solid rgba(255,64,77,.22)",background:"rgba(255,64,77,.05)",height:"100%"}}>
+                  <div style={{fontSize:11,fontWeight:800,color:B.red,letterSpacing:".14em",textTransform:"uppercase",fontFamily:"Inter",marginBottom:18}}>🚫 Traditional IT Ops</div>
+                  {[
+                    ["47","alerts firing"],
+                    ["2","engineers paged"],
+                    ["90 min","mean time to resolve"],
+                    ["—","no clear root cause"],
+                    ["—","no audit trail"],
+                  ].map(([v,l])=>(
+                    <div key={l} style={{display:"flex",alignItems:"baseline",gap:14,padding:"10px 0",borderBottom:"1px solid rgba(255,64,77,.1)"}}>
+                      <span style={{fontSize:22,fontWeight:900,color:B.red,fontFamily:"Inter",minWidth:80,letterSpacing:"-.02em"}}>{v}</span>
+                      <span style={{fontSize:13,color:B.muted,fontFamily:"Inter"}}>{l}</span>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+              <Reveal delay={.1}>
+                <div style={{padding:"28px 26px",borderRadius:18,border:`1px solid ${B.green}3a`,background:`${B.green}08`,height:"100%",position:"relative",overflow:"hidden"}}>
+                  <div style={{position:"absolute",top:0,right:0,padding:"4px 12px",borderRadius:"0 18px 0 12px",background:B.green,color:"#05050f",fontSize:9,fontWeight:900,letterSpacing:".12em",fontFamily:"Inter"}}>AUTONOMOUS</div>
+                  <div style={{fontSize:11,fontWeight:800,color:"#4ade80",letterSpacing:".14em",textTransform:"uppercase",fontFamily:"Inter",marginBottom:18}}>⚡ iTechSmart UAIO</div>
+                  {[
+                    ["1","alert (deduplicated)"],
+                    ["0","engineers paged"],
+                    ["20 sec","mean time to resolve"],
+                    ["✓","root cause reasoned"],
+                    ["✓","ProofLink receipt"],
+                  ].map(([v,l])=>(
+                    <div key={l} style={{display:"flex",alignItems:"baseline",gap:14,padding:"10px 0",borderBottom:`1px solid ${B.green}1a`}}>
+                      <span style={{fontSize:22,fontWeight:900,color:"#4ade80",fontFamily:"Inter",minWidth:80,letterSpacing:"-.02em"}}>{v}</span>
+                      <span style={{fontSize:13,color:B.muted,fontFamily:"Inter"}}>{l}</span>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+            <Reveal>
+              <div style={{textAlign:"center",fontSize:15,fontWeight:700,color:"#fff",fontFamily:"Inter",marginTop:32,letterSpacing:"-.01em"}}>
+                Same incident. <span style={{color:B.purple}}>Different outcome.</span>
+              </div>
+              <div style={{textAlign:"center",fontSize:14,color:B.muted,fontFamily:"Inter",marginTop:12,maxWidth:600,marginLeft:"auto",marginRight:"auto",lineHeight:1.55}}>
+                Doing nothing means your next outage still depends on <span style={{color:B.red,fontWeight:700}}>someone waking up.</span>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* FORCING FUNCTION */}
+        <section className="section" style={{background:`linear-gradient(180deg,transparent,${B.purple}0e,transparent)`,paddingTop:60,paddingBottom:60}}>
+          <div className="wrap" style={{textAlign:"center"}}>
+            <Reveal>
+              <h2 className="h2" style={{fontSize:"clamp(1.6rem,4vw,2.6rem)",margin:"0 0 24px"}}>
+                Run this on your environment in under <span style={{color:B.purple}}>60 seconds.</span>
+              </h2>
+              <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g" style={{padding:"20px 40px",fontSize:15,letterSpacing:"-.01em",lineHeight:1.4,maxWidth:600}}>
+                Run Free Production Scan → See What YOUR Infrastructure Would Fix Automatically (No Setup • Results in Minutes)
+              </a>
+              <div style={{fontSize:12,color:B.dim,fontFamily:"Inter",marginTop:14,letterSpacing:".02em"}}>
+                No setup · No risk · Results in 2 minutes
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -467,15 +716,15 @@ export default function Page() {
                 <div className="pulse-left">
                   <div className="eyebrow" style={{color:B.purple}}>⚡ Live Demo</div>
                   <h2 className="h2" style={{fontSize:"clamp(1.6rem,3.5vw,2.6rem)"}}>See It Work — Right Now</h2>
-                  <p className="body-text">Run a free Pulse scan. Issues detected, root cause reasoned by Nemotron 49B, and a cryptographic receipt generated in under 2 minutes.</p>
+                  <p className="body-text">Run a free Pulse scan. Issues detected, root cause reasoned, and a cryptographic receipt generated in under 2 minutes.</p>
                 </div>
                 <div className="pulse-right">
-                  {["Real infrastructure scan","Nemotron 49B reasoning","ProofLink receipt generated","No credit card required"].map(item=>(
+                  {["Real infrastructure scan","AI root cause reasoning","ProofLink receipt generated","No credit card required"].map(item=>(
                     <div key={item} className="pulse-check">
                       <span style={{color:B.green,fontSize:16,fontWeight:700,flexShrink:0}}>✓</span> {item}
                     </div>
                   ))}
-                  <a href="https://pulse.itechsmart.dev" target="_blank" className="cta1 cta-g" style={{marginTop:8,textAlign:"center"}}>Try Pulse Free →</a>
+                  <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g" style={{marginTop:8,textAlign:"center"}}>Try Pulse Free →</a>
                 </div>
               </div>
             </Reveal>
@@ -487,8 +736,8 @@ export default function Page() {
           <div className="wrap">
             <Reveal>
               <div style={{textAlign:"center",marginBottom:44}}>
-                <div className="eyebrow" style={{color:B.purple}}>🏢 Who It's For</div>
-                <h2 className="h2" style={{textAlign:"center"}}>Built for Teams That Can't Afford Downtime</h2>
+                <div className="eyebrow" style={{color:B.purple}}>🏢 The Shift Is Already Happening</div>
+                <h2 className="h2" style={{textAlign:"center"}}>Who is already moving to this model</h2>
               </div>
             </Reveal>
             <div className="who-grid">
@@ -554,8 +803,17 @@ export default function Page() {
                 Try iTechSmart free or book a live walkthrough. See autonomous IT operations. Verify the proof yourself.
               </p>
               <div className="hero-ctas">
-                <a href="https://pulse.itechsmart.dev" target="_blank" className="cta1 cta-g" style={{fontSize:17,padding:"18px 48px"}}>Try It Free</a>
-                <a href="https://itechsmart.dev/contact" target="_blank" className="cta2" style={{fontSize:17,padding:"18px 40px"}}>Book a Demo</a>
+                <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g" style={{fontSize:17,padding:"18px 48px"}}>Run Free Scan</a>
+                <a href="https://itechsmart.dev/contact" target="_blank" className="cta2" style={{fontSize:17,padding:"18px 36px"}}>Watch Demo</a>
+                <a href="https://whitepaper.itechsmart.dev" target="_blank" className="cta2" style={{fontSize:17,padding:"18px 32px"}}>Download Whitepaper</a>
+              </div>
+              <div style={{marginTop:64,paddingTop:48,borderTop:`1px solid ${B.border}`}}>
+                <p style={{fontSize:"clamp(1.3rem,3vw,2rem)",fontWeight:800,color:"#fff",fontFamily:"Inter",lineHeight:1.35,letterSpacing:"-.02em",maxWidth:720,margin:"0 auto"}}>
+                  The question is no longer <span style={{color:B.muted,fontWeight:600}}>if</span> infrastructure can run itself.
+                </p>
+                <p style={{fontSize:"clamp(1.3rem,3vw,2rem)",fontWeight:800,fontFamily:"Inter",lineHeight:1.35,letterSpacing:"-.02em",maxWidth:720,margin:"16px auto 0",background:`linear-gradient(135deg,${B.purple} 0%,${B.blue} 60%,${B.teal} 100%)`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>
+                  The question is why yours doesn&apos;t.
+                </p>
               </div>
             </Reveal>
           </div>
