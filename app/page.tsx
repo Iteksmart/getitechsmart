@@ -460,6 +460,7 @@ export default function Page() {
             <div className="hero-ctas">
               <a href="https://itechsmart.dev/pulse" target="_blank" className="cta1 cta-g">Run Free Production Scan → See What YOUR Infrastructure Would Fix Automatically (No Setup • Results in Minutes)</a>
               <a href="https://docs.itechsmart.dev/demo" target="_blank" className="cta2">Watch Demo</a>
+              <a href="https://itechsmart.dev/proof" target="_blank" className="cta2">View Live Proof →</a>
             </div>
             <div style={{fontSize:12,color:B.dim,fontFamily:"Inter",marginTop:10,marginBottom:20,letterSpacing:".02em"}}>
               No setup · No risk · Results in 2 minutes
