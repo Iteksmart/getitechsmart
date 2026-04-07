@@ -1,0 +1,17 @@
+{
+  "redirects": [
+    { "source": "/start", "destination": "https://itechsmart.dev/start", "permanent": true },
+    { "source": "/blog", "destination": "https://itechsmart.dev/blog", "permanent": true },
+    { "source": "/blog/:path*", "destination": "https://itechsmart.dev/blog/:path*", "permanent": true },
+    { "source": "/whitepaper", "destination": "https://itechsmart.dev/whitepaper", "permanent": true },
+    { "source": "/changelog", "destination": "https://itechsmart.dev/changelog", "permanent": true },
+    { "source": "/pulse", "destination": "https://itechsmart.dev/pulse", "permanent": true },
+    { "source": "/uaio", "destination": "https://itechsmart.dev/uaio", "permanent": true },
+    { "source": "/aiis", "destination": "https://itechsmart.dev/aiis", "permanent": true },
+    { "source": "/uais", "destination": "https://itechsmart.dev/uais", "permanent": true },
+    { "source": "/verify", "destination": "https://itechsmart.dev/verify", "permanent": true },
+    { "source": "/about", "destination": "https://itechsmart.dev/about", "permanent": true },
+    { "source": "/contact", "destination": "https://itechsmart.dev/contact", "permanent": true },
+    { "source": "/api/platform/health", "destination": "https://itechsmart.dev/api/platform/health", "permanent": false }
+  ]
+}
