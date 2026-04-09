@@ -834,6 +834,10 @@ export default function Page() {
             {[["Platform","https://itechsmart.dev"],["Whitepaper","https://itechsmart.dev/whitepaper"],["Verify Proof","https://verify.itechsmart.dev"],["UAIO Category","https://uaio.itechsmart.dev"],["Docs","https://docs.itechsmart.dev"]].map(([l,h])=>(
               <a key={l} href={h} target="_blank" style={{fontSize:13,color:B.dim,textDecoration:"none",fontWeight:500,fontFamily:"Inter"}}>{l}</a>
             ))}
+            <a href="/pitch-deck" style={{display:"inline-flex",alignItems:"center",gap:"6px",background:"rgba(107,0,255,0.14)",border:"1px solid rgba(107,0,255,0.3)",borderRadius:"8px",padding:"7px 13px",color:"#9933FF",textDecoration:"none",fontSize:"13px",fontWeight:700}}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg>
+              Pitch Deck
+            </a>
           </div>
           <div style={{fontSize:12,color:"rgba(255,255,255,.18)",fontFamily:"Inter"}}>© 2026 iTechSmart Inc.</div>
         </footer>
