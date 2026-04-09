@@ -425,7 +425,7 @@ export default function GetITechSmartHome() {
   const NAV_LINKS = [
     ['Platform',    'https://itechsmart.dev'],
     ['Proof',       'https://itechsmart.dev/proof'],
-    ['Whitepaper',  'https://itechsmart.dev/whitepaper'],
+    ['Whitepaper',  'https://whitepaper.itechsmart.dev'],
     ['Start Here',  'https://itechsmart.dev/start'],
     ['Pitch Deck',  '/pitch-deck'],
   ];
@@ -883,7 +883,7 @@ export default function GetITechSmartHome() {
             </span>
           </div>
           <div style={{ display:'flex', gap:20, flexWrap:'wrap' }}>
-            {[['Platform','https://itechsmart.dev'],['Whitepaper','https://itechsmart.dev/whitepaper'],['Verify Proof','https://verify.itechsmart.dev'],['UAIO Category','https://uaio.itechsmart.dev'],['Docs','https://docs.itechsmart.dev'],['Pitch Deck','/pitch-deck']].map(([l,h]) => (
+            {[['Platform','https://itechsmart.dev'],['Whitepaper','https://whitepaper.itechsmart.dev'],['Verify Proof','https://verify.itechsmart.dev'],['UAIO Category','https://uaio.itechsmart.dev'],['Docs','https://docs.itechsmart.dev'],['Pitch Deck','/pitch-deck']].map(([l,h]) => (
               <a key={l} href={h} style={{ fontSize:12, color:'var(--muted)', transition:'color .15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--fg)')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>{l}</a>
