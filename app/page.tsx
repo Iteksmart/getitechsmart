@@ -233,6 +233,82 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
   .cta-row     { flex-direction:column; align-items:stretch; }
   .cta-row a, .cta-row button { width:100%; justify-content:center; }
 }
+
+/* ── Hamburger nav ───────────────────────────────────────────────── */
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: 24px;
+}
+@media (min-width: 1024px) {
+  .nav-desktop { display: flex; }
+  .hamburger   { display: none !important; }
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid rgba(153,51,255,0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.hamburger:hover { border-color: rgba(153,51,255,0.6); }
+
+.bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--fg);
+  transition: transform .25s ease, opacity .2s ease;
+  transform-origin: center;
+}
+
+/* Open state — animate to ✕ */
+.bar-top.open  { transform: translateY(7px) rotate(45deg); }
+.bar-mid.open  { opacity: 0; transform: scaleX(0); }
+.bar-bot.open  { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile dropdown */
+.mobile-menu {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: rgba(5,5,15,0.98);
+  border-bottom: 1px solid rgba(153,51,255,0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 4px 0 16px;
+  animation: fadeUp .2s ease both;
+}
+.mobile-menu a {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: color .15s, background .15s;
+  text-decoration: none;
+}
+.mobile-menu a:hover {
+  color: var(--fg);
+  background: rgba(153,51,255,0.06);
+}
+.mobile-menu-cta {
+  padding: 14px 20px 0;
+}
 `;
 
 /* ─── Data ───────────────────────────────────────────────────────────────── */
@@ -339,6 +415,13 @@ export default function GetITechSmartHome() {
     return () => clearInterval(id);
   }, []);
 
+  // Close mobile menu on desktop resize
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 1024) setMobileMenuOpen(false); };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   const NAV_LINKS = [
     ['Platform',    'https://itechsmart.dev'],
     ['Proof',       'https://itechsmart.dev/proof'],
@@ -352,34 +435,43 @@ export default function GetITechSmartHome() {
       <style>{CSS}</style>
 
       {/* ══ NAV ════════════════════════════════════════════════════════════ */}
-      <nav style={{ position:'fixed', top:0, left:0, right:0, zIndex:100, background:'var(--nav-bg)', borderBottom:'1px solid rgba(153,51,255,0.15)', backdropFilter:'blur(18px)', WebkitBackdropFilter:'blur(18px)', height:64, display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 20px' }}>
-        {/* Logo — exact itechsmart.dev: "iTech" white + "Smart" #9933FF */}
-        <a href="/" style={{ display:'flex', alignItems:'center', gap:8, flexShrink:0 }}>
+      <nav style={{ position:'fixed', top:0, left:0, right:0, zIndex:100, background:'var(--nav-bg)', borderBottom:'1px solid rgba(153,51,255,0.15)', backdropFilter:'blur(18px)', WebkitBackdropFilter:'blur(18px)', height:64, display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 20px', gap:12 }}>
+        {/* Logo */}
+        <a href="/" style={{ display:'flex', alignItems:'center', gap:8, flexShrink:0, textDecoration:'none' }}>
           <img src="/itechsmart_icon.png" alt="iTechSmart" style={{ width:26, height:26, borderRadius:'50%' }} />
-          <span style={{ fontWeight:800, fontSize:16, letterSpacing:'-0.3px' }}>
+          <span style={{ fontWeight:800, fontSize:16, letterSpacing:'-0.3px', whiteSpace:'nowrap' }}>
             <span style={{ color:'#ffffff' }}>iTech</span><span style={{ color:'#9933FF' }}>Smart</span>
           </span>
         </a>
 
-        {/* Desktop nav */}
-        <div className="nav-links" style={{ display:'flex', alignItems:'center', gap:24 }}>
+        {/* Desktop nav — hidden on mobile via CSS */}
+        <div className="nav-desktop">
           {NAV_LINKS.map(([l,h]) => <a key={l} href={h} className="nav-link">{l}</a>)}
           <a href="https://itechsmart.dev/pulse" className="btn-cta" style={{ animation:'none', fontSize:13, padding:'8px 16px', borderRadius:9 }}>Try Free →</a>
         </div>
 
-        {/* Mobile hamburger */}
-        <button onClick={() => setMobileMenuOpen(o => !o)} style={{ display:'none', padding:'8px', color:'var(--fg)', fontSize:20 }} className="mobile-menu-btn" aria-label="Menu">
-          {mobileMenuOpen ? '✕' : '☰'}
+        {/* Hamburger — hidden on desktop via CSS, shows on mobile */}
+        <button
+          className="hamburger"
+          onClick={() => setMobileMenuOpen(o => !o)}
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
+        >
+          <span className={`bar bar-top${mobileMenuOpen ? ' open' : ''}`} />
+          <span className={`bar bar-mid${mobileMenuOpen ? ' open' : ''}`} />
+          <span className={`bar bar-bot${mobileMenuOpen ? ' open' : ''}`} />
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
-        <div style={{ position:'fixed', top:64, left:0, right:0, zIndex:99, background:'rgba(5,5,15,0.98)', borderBottom:'1px solid rgba(153,51,255,0.15)', backdropFilter:'blur(18px)', padding:'16px 20px', display:'flex', flexDirection:'column', gap:12 }}>
+        <div className="mobile-menu">
           {NAV_LINKS.map(([l,h]) => (
-            <a key={l} href={h} onClick={() => setMobileMenuOpen(false)} style={{ fontSize:16, fontWeight:500, color:'var(--muted-light)', padding:'8px 0', borderBottom:'1px solid var(--divider)' }}>{l}</a>
+            <a key={l} href={h} onClick={() => setMobileMenuOpen(false)}>{l}</a>
           ))}
-          <a href="https://itechsmart.dev/pulse" className="btn-cta" style={{ marginTop:8, justifyContent:'center' }}>Try Free →</a>
+          <div className="mobile-menu-cta">
+            <a href="https://itechsmart.dev/pulse" className="btn-cta" style={{ width:'100%', justifyContent:'center' }} onClick={() => setMobileMenuOpen(false)}>Try Free →</a>
+          </div>
         </div>
       )}
 
@@ -802,12 +894,6 @@ export default function GetITechSmartHome() {
 
       </main>
 
-      {/* Mobile menu button shown via media query */}
-      <style>{`
-        @media (max-width: 1023px) {
-          .mobile-menu-btn { display:flex !important; align-items:center; }
-        }
-      `}</style>
     </>
   );
 }
