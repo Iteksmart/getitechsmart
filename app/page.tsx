@@ -395,17 +395,19 @@ function isLast24h(ts: string) { return (Date.now() - new Date(ts).getTime()) < 
 
 function AnimCounter({ target, duration = 1800 }: { target: number; duration?: number }) {
   const [val, setVal] = useState(0);
-  const started = useRef(false);
+  const animated = useRef(false);
   const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
+    if (target === 0) { setVal(0); return; }
+    animated.current = false; // reset so new target triggers animation
     const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !started.current) {
-        started.current = true;
+      if (e.isIntersecting && !animated.current) {
+        animated.current = true;
         const t0 = Date.now();
         const tick = () => { const p = Math.min((Date.now() - t0) / duration, 1); setVal(Math.floor((1 - Math.pow(1 - p, 3)) * target)); if (p < 1) requestAnimationFrame(tick); };
         tick();
       }
-    }, { threshold: 0.3 });
+    }, { threshold: 0.1 });
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, [target, duration]);
@@ -462,7 +464,20 @@ function AuditLedger() {
   const SHOW = 5;
 
   useEffect(() => {
-    fetch('https://itechsmart.dev/api/ledger').then(r => r.json()).then(setData).catch(console.error);
+    const load = async () => {
+      try {
+        const r = await fetch('https://itechsmart.dev/api/ledger', { cache: 'no-store' });
+        if (!r.ok) throw new Error('primary failed');
+        setData(await r.json());
+      } catch {
+        try {
+          const r2 = await fetch('https://ledger.itechsmart.dev/_data/ledger.json', { cache: 'no-store' });
+          if (!r2.ok) throw new Error('fallback failed');
+          setData(await r2.json());
+        } catch { /* silent — shows loading state */ }
+      }
+    };
+    load();
   }, []);
 
   const entries = data?.entries || [];
