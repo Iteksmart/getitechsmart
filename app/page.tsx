@@ -358,7 +358,7 @@ const SOLUTIONS = [
 const VERTICALS = [
   { icon:'🏢', title:'MSPs',       color:'#9933FF', desc:'Monitor and auto-remediate across every client.',       items:['Multi-tenant isolation','Per-client ProofLink ledger','Auto-escalation rules'] },
   { icon:'🏭', title:'Enterprise', color:'#3366FF', desc:'Eliminate alert fatigue. 85% MTTR reduction.',           items:['WinRM remediation','131 containers live','Grafana dashboards'] },
-  { icon:'🏥', title:'Healthcare', color:'#0FF4C6', desc:'HL7 interface monitoring. HIPAA-aligned audit.',         items:['HL7 Pro product','HIPAA 89/100','INC auto-creation'] },
+  { icon:'🏥', title:'Healthcare', color:'#0FF4C6', desc:'HL7 interface monitoring. HIPAA-aligned audit.',         items:['HL7 Pro product','HIPAA 100/100','INC auto-creation'] },
   { icon:'🏛', title:'Government', color:'#22C55E', desc:'SDVOSB-certified. Air-gap capable. FedRAMP pathway.',    items:['CAGE 172W2 · UEI ZCPFX4N86G36','NIST 96% · FIPS 100%','Citadel product'] },
 ];
 
@@ -883,7 +883,7 @@ export default function GetITechSmartHome() {
             </span>
           </div>
           <div style={{ display:'flex', gap:20, flexWrap:'wrap' }}>
-            {[['Platform','https://itechsmart.dev'],['Whitepaper','https://whitepaper.itechsmart.dev'],['Verify Proof','https://verify.itechsmart.dev'],['UAIO Category','https://uaio.itechsmart.dev'],['Docs','https://docs.itechsmart.dev'],['Pitch Deck','/pitch-deck']].map(([l,h]) => (
+            {[['Platform','https://itechsmart.dev'],['Whitepaper','https://whitepaper.itechsmart.dev'],['Verify Proof','https://verify.itechsmart.dev'],['UAIO Category','https://uaio.itechsmart.dev'],['Docs','https://docs.itechsmart.dev'],['Pitch Deck','/pitch-deck'],['Integrations','https://itechsmart.dev/integrations'],['FAQ','https://itechsmart.dev/faq'],['Press','https://itechsmart.dev/news']].map(([l,h]) => (
               <a key={l} href={h} style={{ fontSize:12, color:'var(--muted)', transition:'color .15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--fg)')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>{l}</a>
