@@ -370,6 +370,139 @@ const OUTCOMES = [
   { icon:'💵', title:'Reduced costs',     desc:'85% MTTR improvement' },
 ];
 
+/* ─── Audit Ledger ──────────────────────────────────────────────────────── */
+
+interface LedgerEntry {
+  id: string; timestamp: string; category: string; actor: string;
+  subject: string; action: string; outcome: string; hash_sha256: string;
+  verify_url: string; tamper_detected: boolean; prev_hash: string;
+}
+
+const CAT_STYLE: Record<string, { label: string; color: string; bg: string; icon: string }> = {
+  self_healing:  { label: 'Self-Heal',    color: '#10b981', bg: 'rgba(16,185,129,0.12)',  icon: '\u26A1' },
+  platform_fix:  { label: 'Platform Fix', color: '#3b82f6', bg: 'rgba(59,130,246,0.12)',  icon: '\uD83D\uDD27' },
+  security:      { label: 'Security',     color: '#ef4444', bg: 'rgba(239,68,68,0.12)',   icon: '\uD83D\uDEE1' },
+  compliance:    { label: 'Compliance',   color: '#f59e0b', bg: 'rgba(245,158,11,0.12)',  icon: '\uD83D\uDCCB' },
+  deployment:    { label: 'Deploy',       color: '#8b5cf6', bg: 'rgba(139,92,246,0.12)',  icon: '\uD83D\uDE80' },
+};
+
+function catStyle(c: string) {
+  return CAT_STYLE[c] || { label: c.replace(/_/g, ' '), color: '#6b7280', bg: 'rgba(107,114,128,0.12)', icon: '\u2699' };
+}
+
+function ago(ts: string) {
+  const s = Math.floor((Date.now() - new Date(ts).getTime()) / 1000);
+  if (s < 60) return `${s}s ago`;
+  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
+  if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
+  return `${Math.floor(s / 86400)}d ago`;
+}
+
+function LedgerRow({ entry, index }: { entry: LedgerEntry; index: number }) {
+  const [open, setOpen] = useState(false);
+  const c = catStyle(entry.category);
+  return (
+    <div style={{ border: `1px solid ${open ? c.color + '40' : 'var(--card-bd)'}`, borderRadius: 10, background: open ? c.bg : 'var(--card-bg)', transition: 'border-color .2s' }}>
+      <button onClick={() => setOpen(!open)} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 10, padding: '12px 14px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+        <span style={{ fontSize: 10, color: '#4b5563', fontFamily: 'monospace', minWidth: 28 }}>#{String(index + 1).padStart(3, '0')}</span>
+        <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 20, background: c.bg, color: c.color, whiteSpace: 'nowrap', flexShrink: 0 }}>{c.icon} {c.label}</span>
+        <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--fg)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{entry.subject}</span>
+        <span style={{ fontSize: 10, fontWeight: 600, color: entry.tamper_detected ? '#ef4444' : '#10b981', whiteSpace: 'nowrap', flexShrink: 0 }}>{entry.tamper_detected ? '\u26A0 TAMPERED' : '\u2713 VERIFIED'}</span>
+        <span style={{ fontSize: 10, color: '#6b7280', whiteSpace: 'nowrap', flexShrink: 0, minWidth: 60, textAlign: 'right' }}>{ago(entry.timestamp)}</span>
+        <span style={{ color: '#4b5563', fontSize: 12, transition: 'transform .2s', transform: open ? 'rotate(180deg)' : 'none', flexShrink: 0 }}>{'\u25BE'}</span>
+      </button>
+      {open && (
+        <div style={{ padding: '0 14px 14px', borderTop: `1px solid ${c.color}20` }}>
+          <div style={{ fontSize: 12, color: '#d1d5db', lineHeight: 1.6, margin: '10px 0' }}>
+            <span style={{ color: '#6b7280', fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.06em', display: 'block', marginBottom: 4 }}>Action</span>
+            {entry.action}
+          </div>
+          <div style={{ fontSize: 12, color: '#10b981', marginBottom: 10 }}>
+            <span style={{ color: '#6b7280', fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.06em', display: 'block', marginBottom: 4 }}>Outcome</span>
+            {'\u2713'} {entry.outcome}
+          </div>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+            <code style={{ fontSize: 10, color: '#7c3aed', background: 'rgba(124,58,237,0.1)', padding: '3px 8px', borderRadius: 4, fontFamily: 'monospace', letterSpacing: '.05em' }}>SHA-256: {entry.id}</code>
+            {entry.verify_url && <a href={entry.verify_url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, color: '#3b82f6', textDecoration: 'none', fontWeight: 600 }}>Verify {'\u2197'}</a>}
+            <span style={{ fontSize: 10, color: '#4b5563', marginLeft: 'auto' }}>{new Date(entry.timestamp).toLocaleString()}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AuditLedger() {
+  const [entries, setEntries] = useState<LedgerEntry[]>([]);
+  const [total, setTotal] = useState(0);
+  const [err, setErr] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const SHOW = 5;
+
+  useEffect(() => {
+    fetch('https://itechsmart.dev/api/ledger')
+      .then(r => r.json())
+      .then(d => { setEntries(d.entries || []); setTotal(d.total_entries || 0); })
+      .catch(() => setErr(true));
+  }, []);
+
+  const visible = showAll ? entries : entries.slice(0, SHOW);
+  const tampered = entries.filter(e => e.tamper_detected).length;
+
+  return (
+    <section className="section" style={{ background: 'rgba(0,0,0,0.18)' }}>
+      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 28, gap: 16, flexWrap: 'wrap' }}>
+          <div>
+            <p className="section-label" style={{ color: 'var(--purple)', marginBottom: 10 }}>{'\uD83D\uDD10'} Live Public Audit Ledger</p>
+            <h2 className="display display-md" style={{ marginBottom: 6 }}>Every Action. Cryptographically Proven.</h2>
+            <p style={{ fontSize: 14, color: 'var(--muted)', marginTop: 8 }}>Tamper-evident SHA-256 receipts. Append-only. Publicly verifiable.</p>
+          </div>
+          {total > 0 && (
+            <div style={{ display: 'flex', gap: 12, flexShrink: 0 }}>
+              <div style={{ textAlign: 'center', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 10, padding: '10px 16px' }}>
+                <div style={{ fontSize: 22, fontWeight: 800, color: '#a78bfa', lineHeight: 1 }}>{total}</div>
+                <div style={{ fontSize: 10, color: '#6b7280', marginTop: 3 }}>Total Receipts</div>
+              </div>
+              <div style={{ textAlign: 'center', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: 10, padding: '10px 16px' }}>
+                <div style={{ fontSize: 22, fontWeight: 800, color: '#10b981', lineHeight: 1 }}>{tampered}</div>
+                <div style={{ fontSize: 10, color: '#6b7280', marginTop: 3 }}>Tamper Events</div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Entries */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {err ? (
+            <div style={{ padding: 24, textAlign: 'center', color: '#6b7280', fontSize: 14, background: 'var(--card-bg)', borderRadius: 10, border: '1px solid var(--card-bd)' }}>Unable to load ledger — try refreshing</div>
+          ) : entries.length === 0 ? (
+            [...Array(5)].map((_, i) => <div key={i} style={{ height: 46, borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }} />)
+          ) : (
+            visible.map((e, i) => <LedgerRow key={e.id} entry={e} index={i} />)
+          )}
+        </div>
+
+        {/* Show more */}
+        {entries.length > SHOW && (
+          <div style={{ textAlign: 'center', marginTop: 16 }}>
+            <button onClick={() => setShowAll(!showAll)} style={{ background: 'transparent', border: '1px solid var(--purple-bd)', borderRadius: 8, padding: '8px 20px', color: '#a78bfa', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+              {showAll ? '\u2191 Show less' : `\u2193 Show all ${entries.length} receipts`}
+            </button>
+          </div>
+        )}
+
+        {/* Footer links */}
+        <div style={{ textAlign: 'center', marginTop: 20, fontSize: 12, color: '#4b5563' }}>
+          Full ledger at{' '}<a href="https://itechsmart.dev/proof" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--purple)' }}>itechsmart.dev/proof {'\u2197'}</a>
+          {' \u00B7 '}<a href="https://verify.itechsmart.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6' }}>verify.itechsmart.dev {'\u2197'}</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Component ──────────────────────────────────────────────────────────── */
 export default function GetITechSmartHome() {
   const [cycleIdx, setCycleIdx]   = useState(0);
@@ -828,6 +961,9 @@ export default function GetITechSmartHome() {
             <p style={{ textAlign:'center', marginTop:24, fontSize:11, color:'rgba(255,255,255,0.18)' }}>SDVOSB · Veteran-Owned · Irvine CA · F6S #6 Globally</p>
           </div>
         </section>
+
+        {/* ══ PUBLIC AUDIT LEDGER ════════════════════════════════════════════ */}
+        <AuditLedger />
 
         {/* ══ FREE SCAN CTA ════════════════════════════════════════════════ */}
         <div style={{ background:'rgba(153,51,255,0.06)', borderTop:'1px solid rgba(153,51,255,0.14)', borderBottom:'1px solid rgba(153,51,255,0.14)', padding:'40px 20px', textAlign:'center' }}>
