@@ -686,6 +686,73 @@ export default function GetITechSmartHome() {
         </div>
       </div>
 
+      {/* JSON-LD Schemas */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'SoftwareApplication',
+        name: 'iTechSmart UAIO Platform', applicationCategory: 'IT Operations Management',
+        operatingSystem: 'Cloud / On-Premise',
+        description: 'Unified Autonomous IT Operations platform that detects, remediates, and cryptographically proves every infrastructure action.',
+        url: 'https://www.getitechsmart.com',
+        offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: '0', highPrice: '2499', offerCount: '4' },
+        creator: { '@type': 'Organization', name: 'iTechSmart Inc.', url: 'https://itechsmart.dev' },
+      })}} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'Organization',
+        name: 'iTechSmart Inc.', url: 'https://itechsmart.dev', logo: 'https://itechsmart.dev/logo.svg',
+        description: "The world's first UAIO platform — autonomous IT operations with cryptographic proof.",
+        foundingDate: '2021', award: 'Ranked #6 of 2M+ AI Startups — F6S',
+        identifier: [
+          { '@type': 'PropertyValue', name: 'CAGE', value: '172W2' },
+          { '@type': 'PropertyValue', name: 'UEI', value: 'ZCPFX4N86G36' },
+        ],
+      })}} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'HowTo',
+        name: 'How iTechSmart UAIO Works',
+        description: 'Autonomous IT operations in 5 steps: Detect, Simulate, Decide, Fix, Prove.',
+        step: [
+          { '@type': 'HowToStep', name: 'Detect', text: 'Pulse Scanner identifies infrastructure anomalies in real-time' },
+          { '@type': 'HowToStep', name: 'Simulate', text: 'Digital Twin simulates the fix before applying it' },
+          { '@type': 'HowToStep', name: 'Decide', text: 'OctoAI determines the optimal remediation path' },
+          { '@type': 'HowToStep', name: 'Fix', text: 'Automated remediation applied with zero human intervention' },
+          { '@type': 'HowToStep', name: 'Prove', text: 'ProofLink generates a SHA-256 cryptographic receipt for the action' },
+        ],
+      })}} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'What is UAIO?', acceptedAnswer: { '@type': 'Answer', text: 'UAIO (Unified Autonomous IT Operations) is a platform category by iTechSmart that autonomously detects, fixes, and cryptographically proves every IT action — replacing fragmented monitoring, ticketing, and AIOps tools.' }},
+          { '@type': 'Question', name: 'How does iTechSmart prove every fix?', acceptedAnswer: { '@type': 'Answer', text: 'Every automated action generates a ProofLink receipt — a SHA-256 cryptographic hash chained immutably, verifiable at verify.itechsmart.dev.' }},
+          { '@type': 'Question', name: 'Is iTechSmart compliant for government use?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. iTechSmart Citadel is FedRAMP-pathway, FIPS-aligned, with NIST CSF 96/100. SDVOSB certified, CAGE Code 172W2.' }},
+        ],
+      })}} />
+
+      {/* Server-rendered SEO content — visible to crawlers */}
+      <div style={{ position:'absolute', width:1, height:1, overflow:'hidden', clip:'rect(0,0,0,0)', whiteSpace:'nowrap' }} aria-hidden="false">
+        <h1>iTechSmart UAIO Platform — Autonomous IT Operations with Cryptographic Proof</h1>
+        <p>iTechSmart is the world&apos;s first Unified Autonomous IT Operations (UAIO) platform. Automatically detect infrastructure issues, fix them with zero human intervention, and generate cryptographic proof of every action.</p>
+        <h2>Self-Healing Infrastructure for Enterprise IT</h2>
+        <p>131 containers, 115 microservices, 88 databases. Mean time to resolve: 20 seconds. Cloud-native IT automation with real-time anomaly detection.</p>
+        <h2>AI-Powered IT Operations Management</h2>
+        <p>Replace PagerDuty, Datadog, and ServiceNow with a single autonomous operations layer. IT incident management, DevOps automation, and compliance — unified.</p>
+        <nav aria-label="Site navigation">
+          <a href="https://itechsmart.dev">iTechSmart Platform</a>
+          <a href="https://itechsmart.dev/industries/healthcare">Healthcare IT (HL7)</a>
+          <a href="https://itechsmart.dev/industries/government">Government (Citadel)</a>
+          <a href="https://itechsmart.dev/security">Security &amp; Governance</a>
+          <a href="https://itechsmart.dev/pricing">Pricing</a>
+          <a href="https://itechsmart.dev/pulse">Free Pulse Scan</a>
+          <a href="https://itechsmart.dev/proof">Live Proof Ledger</a>
+          <a href="https://itechsmart.dev/integrations">Integrations</a>
+          <a href="https://itechsmart.dev/about">About iTechSmart</a>
+          <a href="https://itechsmart.dev/faq">FAQ</a>
+          <a href="https://itechsmart.dev/contact">Contact</a>
+          <a href="https://docs.itechsmart.dev">Documentation</a>
+          <a href="https://verify.itechsmart.dev">Verify Proof</a>
+          <a href="https://whitepaper.itechsmart.dev">Whitepaper</a>
+        </nav>
+      </div>
+
       <main style={{ paddingTop:64, paddingBottom:48 }}>
 
         {/* ══ HERO ═══════════════════════════════════════════════════════ */}
@@ -705,9 +772,9 @@ export default function GetITechSmartHome() {
               </div>
 
               {/* ── HERO HEADLINE with cycling word animation ── */}
-              <h1 className="display display-xl fade-up d2" style={{ color:'var(--fg)', marginBottom:6 }}>
+              <h2 className="display display-xl fade-up d2" style={{ color:'var(--fg)', marginBottom:6 }}>
                 Stop Fighting IT
-              </h1>
+              </h2>
               {/* Cycling word — slides up/down, container sized to exactly one line of display-xl */}
               <div className="fade-up d2" style={{
                 overflow: 'hidden',
@@ -720,9 +787,9 @@ export default function GetITechSmartHome() {
                     ? 'slideIn .38s cubic-bezier(.22,1,.36,1) both'
                     : 'slideOut .28s cubic-bezier(.55,0,1,.45) both',
                 }}>
-                  <h1 className="display display-xl gradient-text text-glow" style={{ display:'block' }}>
+                  <span className="display display-xl gradient-text text-glow" style={{ display:'block' }} role="text" aria-label={CYCLE_WORDS[cycleIdx]}>
                     {CYCLE_WORDS[cycleIdx]}
-                  </h1>
+                  </span>
                 </div>
               </div>
 
