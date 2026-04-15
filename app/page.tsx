@@ -835,7 +835,7 @@ export default function GetITechSmartHome() {
             </div>
 
             {/* ── Right: UAIO loop + ProofLink card ── */}
-            <div className="hero-right fade-in d3" style={{ display:'flex', gap:16, alignItems:'flex-start', flexShrink:0 }}>
+            <div className="hero-right fade-in d3" style={{ gap:16, alignItems:'flex-start' }}>
               {/* UAIO step column */}
               <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
                 {STEPS.map((step, i) => (
@@ -860,7 +860,7 @@ export default function GetITechSmartHome() {
               </div>
 
               {/* ProofLink card */}
-              <div className="proof-card" style={{ width:300 }}>
+              <div className="proof-card" style={{ width:'100%', maxWidth:300 }}>
                 <div style={{ padding:'11px 16px 8px', borderBottom:'1px solid var(--divider)' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:7 }}>
                     <div style={{ width:7, height:7, borderRadius:'50%', background:'var(--green)', animation:'pulse 2s ease infinite', flexShrink:0 }} />
@@ -984,7 +984,7 @@ export default function GetITechSmartHome() {
                   <a href="https://whitepaper.itechsmart.dev" className="btn-ghost" style={{ fontSize:12, padding:'10px 14px' }}>Architecture Whitepaper →</a>
                 </div>
               </div>
-              <div className="proof-card" style={{ boxShadow:'0 0 60px rgba(34,197,94,0.1)' }}>
+              <div className="proof-card" style={{ maxWidth:'100%' }}>
                 <div style={{ padding:'13px 16px 9px', borderBottom:'1px solid var(--divider)' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:8 }}>
                     <div style={{ width:7, height:7, borderRadius:'50%', background:'var(--green)', animation:'pulse 2s ease infinite', flexShrink:0 }} />
