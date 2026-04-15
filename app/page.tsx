@@ -1154,7 +1154,10 @@ export default function GetITechSmartHome() {
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>{l}</a>
             ))}
           </div>
-          <span style={{ fontSize:11, color:'rgba(255,255,255,0.18)' }}>© 2026 iTechSmart Inc.</span>
+          <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+            <img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception Program Member" style={{ height:28, opacity:0.7 }} />
+            <span style={{ fontSize:11, color:'rgba(255,255,255,0.18)' }}>{'\u00A9'} 2026 iTechSmart Inc.</span>
+          </div>
         </footer>
 
       </main>
