@@ -357,7 +357,7 @@ const SOLUTIONS = [
 
 const VERTICALS = [
   { icon:'🏢', title:'MSPs',       color:'#9933FF', desc:'Monitor and auto-remediate across every client.',       items:['Multi-tenant isolation','Per-client ProofLink ledger','Auto-escalation rules'] },
-  { icon:'🏭', title:'Enterprise', color:'#3366FF', desc:'Eliminate alert fatigue. 85% MTTR reduction.',           items:['WinRM remediation','131 containers live','Grafana dashboards'] },
+  { icon:'🏭', title:'Enterprise', color:'#3366FF', desc:'Eliminate alert fatigue. 85% MTTR reduction.',           items:['WinRM remediation','132 containers live','Grafana dashboards'] },
   { icon:'🏥', title:'Healthcare', color:'#0FF4C6', desc:'HL7 interface monitoring. HIPAA-aligned audit.',         items:['HL7 Pro product','HIPAA 100/100','INC auto-creation'] },
   { icon:'🏛', title:'Government', color:'#22C55E', desc:'SDVOSB-certified. Air-gap capable. FedRAMP pathway.',    items:['CAGE 172W2 · UEI ZCPFX4N86G36','NIST 96% · FIPS 100%','Citadel product'] },
 ];
@@ -732,7 +732,7 @@ export default function GetITechSmartHome() {
         <h1>iTechSmart UAIO Platform — Autonomous IT Operations with Cryptographic Proof</h1>
         <p>iTechSmart is the world&apos;s first Unified Autonomous IT Operations (UAIO) platform. Automatically detect infrastructure issues, fix them with zero human intervention, and generate cryptographic proof of every action.</p>
         <h2>Self-Healing Infrastructure for Enterprise IT</h2>
-        <p>131 containers, 115 microservices, 88 databases. Mean time to resolve: 20 seconds. Cloud-native IT automation with real-time anomaly detection.</p>
+        <p>132 containers, 115 microservices, 88 databases. Mean time to resolve: 20 seconds. Cloud-native IT automation with real-time anomaly detection.</p>
         <h2>AI-Powered IT Operations Management</h2>
         <p>Replace PagerDuty, Datadog, and ServiceNow with a single autonomous operations layer. IT incident management, DevOps automation, and compliance — unified.</p>
         <nav aria-label="Site navigation">
@@ -768,7 +768,7 @@ export default function GetITechSmartHome() {
               {/* Live badge */}
               <div className="fade-up d1" style={{ display:'inline-flex', alignItems:'center', gap:8, background:'var(--purple-sm)', border:'1px solid var(--purple-bd)', borderRadius:20, padding:'5px 14px', marginBottom:28 }}>
                 <div style={{ width:7, height:7, borderRadius:'50%', background:'var(--green)', boxShadow:'0 0 8px #22C55E', animation:'pulse 2s ease infinite', flexShrink:0 }} />
-                <span style={{ fontSize:11, fontWeight:600, color:'rgba(224,209,255,.9)', letterSpacing:'.02em' }}>Live System Status: Active · Monitoring 131 containers across 84 services</span>
+                <span style={{ fontSize:11, fontWeight:600, color:'rgba(224,209,255,.9)', letterSpacing:'.02em' }}>Live System Status: Active · Monitoring 132 containers across 84 services</span>
               </div>
 
               {/* ── HERO HEADLINE with cycling word animation ── */}
