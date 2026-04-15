@@ -1120,6 +1120,42 @@ export default function GetITechSmartHome() {
           </div>
         </section>
 
+        {/* ══ BREAK IT CHALLENGE ═══════════════════════════════════════════ */}
+        <section style={{ background:'#000', borderTop:'1px solid rgba(239,68,68,0.15)', borderBottom:'1px solid rgba(239,68,68,0.15)' }}>
+          <div style={{ maxWidth:900, margin:'0 auto', padding:'56px 24px', display:'flex', alignItems:'center', gap:32, flexWrap:'wrap' }}>
+            <div style={{ flex:1, minWidth:280 }}>
+              <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(239,68,68,0.1)', border:'1px solid rgba(239,68,68,0.25)', borderRadius:20, padding:'4px 14px', fontSize:10, fontWeight:700, color:'#ef4444', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:16 }}>
+                {'\u2694\uFE0F'} Open Challenge
+              </div>
+              <h2 style={{ fontSize:'clamp(24px, 4vw, 36px)', fontWeight:900, margin:'0 0 12px', lineHeight:1.1 }}>
+                Don{'\u2019'}t Trust It.<br />
+                <span style={{ color:'#ef4444' }}>Break It.</span>
+              </h2>
+              <p style={{ fontSize:15, color:'var(--muted)', lineHeight:1.6, margin:'0 0 20px' }}>
+                Kill a real container. Watch autonomous recovery in real-time.
+                Get a Bitcoin-anchored cryptographic receipt. Try to tamper with it.
+              </p>
+              <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+                <a href="https://itechsmart.dev/break-it" style={{ background:'#ef4444', color:'#fff', padding:'12px 24px', borderRadius:8, fontWeight:700, textDecoration:'none', fontSize:14 }}>{'\u2694\uFE0F'} Launch Challenge</a>
+                <a href="https://itechsmart.dev/proof" style={{ background:'transparent', color:'#f9fafb', padding:'12px 24px', borderRadius:8, fontWeight:700, textDecoration:'none', fontSize:14, border:'1px solid #374151' }}>View Proof Ledger</a>
+              </div>
+            </div>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:10, minWidth:220 }}>
+              {[
+                { val:'0', label:'Breaks found', color:'#10b981' },
+                { val:'132', label:'Containers live', color:'#7c3aed' },
+                { val:'131+', label:'BTC receipts', color:'#f7931a' },
+                { val:'6s', label:'Recovery time', color:'#3b82f6' },
+              ].map((s,i) => (
+                <div key={i} style={{ background:'rgba(255,255,255,0.03)', border:'1px solid #1f2937', borderRadius:10, padding:'14px 16px', textAlign:'center' }}>
+                  <div style={{ fontSize:24, fontWeight:900, color:s.color }}>{s.val}</div>
+                  <div style={{ fontSize:10, color:'#6b7280', marginTop:2 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ══ FINAL CTA ════════════════════════════════════════════════════ */}
         <section className="section">
           <div style={{ maxWidth:680, margin:'0 auto', textAlign:'center' }}>
