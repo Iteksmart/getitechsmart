@@ -1122,8 +1122,8 @@ export default function GetITechSmartHome() {
 
         {/* ══ BREAK IT CHALLENGE ═══════════════════════════════════════════ */}
         <section style={{ background:'#000', borderTop:'1px solid rgba(239,68,68,0.15)', borderBottom:'1px solid rgba(239,68,68,0.15)' }}>
-          <div style={{ maxWidth:900, margin:'0 auto', padding:'56px 24px', display:'flex', alignItems:'center', gap:32, flexWrap:'wrap' }}>
-            <div style={{ flex:1, minWidth:280 }}>
+          <div style={{ maxWidth:900, margin:'0 auto', padding:'48px 20px', display:'flex', alignItems:'center', gap:24, flexWrap:'wrap' }}>
+            <div style={{ flex:'1 1 100%' }}>
               <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(239,68,68,0.1)', border:'1px solid rgba(239,68,68,0.25)', borderRadius:20, padding:'4px 14px', fontSize:10, fontWeight:700, color:'#ef4444', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:16 }}>
                 {'\u2694\uFE0F'} Open Challenge
               </div>
@@ -1140,7 +1140,7 @@ export default function GetITechSmartHome() {
                 <a href="https://itechsmart.dev/proof" style={{ background:'transparent', color:'#f9fafb', padding:'12px 24px', borderRadius:8, fontWeight:700, textDecoration:'none', fontSize:14, border:'1px solid #374151' }}>View Proof Ledger</a>
               </div>
             </div>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:10, minWidth:220 }}>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:10, width:'100%', maxWidth:320 }}>
               {[
                 { val:'0', label:'Breaks found', color:'#10b981' },
                 { val:'132', label:'Containers live', color:'#7c3aed' },
