@@ -485,18 +485,18 @@ function AuditLedger() {
   const visible = showAll ? entries : entries.slice(0, SHOW);
 
   return (
-    <section style={{ background: '#000', borderTop: '1px solid #ffffff08', borderBottom: '1px solid #ffffff08', fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <section style={{ background: '#000', borderTop: '1px solid #ffffff08', borderBottom: '1px solid #ffffff08', fontFamily: "'Inter', system-ui, sans-serif", overflowX: 'hidden' }}>
       {/* Live ticker */}
       {entries.length > 0 && <LiveTicker entries={entries} />}
 
-      <div style={{ maxWidth: 960, margin: '0 auto', padding: '60px 24px' }}>
+      <div style={{ maxWidth: 960, margin: '0 auto', padding: 'clamp(32px, 5vw, 60px) 16px' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: 20, padding: '6px 16px', fontSize: 11, fontWeight: 700, color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 20 }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 8px #10b981', animation: 'pulse-dot 2s infinite', display: 'inline-block' }} />
             Live Autonomous Operations
           </div>
-          <h2 style={{ fontSize: 40, fontWeight: 900, color: '#f9fafb', margin: '0 0 16px', lineHeight: 1.1 }}>
+          <h2 style={{ fontSize: 'clamp(24px, 5vw, 40px)', fontWeight: 900, color: '#f9fafb', margin: '0 0 16px', lineHeight: 1.1 }}>
             Your IT Team Can Sleep.<br />
             <span style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>The Platform Doesn{'\u2019'}t.</span>
           </h2>
@@ -506,15 +506,15 @@ function AuditLedger() {
         </div>
 
         {/* Stat counters */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 48 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 160px), 1fr))', gap: 12, marginBottom: 48 }}>
           {[
             { val: data ? last24 : 0, label: 'Autonomous recoveries', sub: 'in the last 24 hours', color: '#10b981', glow: 'rgba(16,185,129,0.2)' },
             { val: data ? data.total_entries : 0, label: 'Cryptographic receipts', sub: 'on the public ledger', color: '#7c3aed', glow: 'rgba(124,58,237,0.2)' },
             { val: 0, label: 'Tamper events', sub: 'detected. Ever.', color: '#3b82f6', glow: 'rgba(59,130,246,0.2)' },
           ].map((stat, i) => (
-            <div key={i} style={{ background: '#0a0a0a', border: `1px solid ${stat.color}30`, borderRadius: 16, padding: '28px 24px', textAlign: 'center', boxShadow: `0 0 40px ${stat.glow}`, position: 'relative', overflow: 'hidden' }}>
+            <div key={i} style={{ background: '#0a0a0a', border: `1px solid ${stat.color}30`, borderRadius: 12, padding: '20px 16px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 50% 0%, ${stat.glow}, transparent 70%)`, pointerEvents: 'none' }} />
-              <div style={{ fontSize: 52, fontWeight: 900, color: stat.color, lineHeight: 1, fontVariantNumeric: 'tabular-nums', position: 'relative' }}><AnimCounter target={stat.val} /></div>
+              <div style={{ fontSize: 'clamp(28px, 6vw, 44px)', fontWeight: 900, color: stat.color, lineHeight: 1, fontVariantNumeric: 'tabular-nums', position: 'relative' }}><AnimCounter target={stat.val} /></div>
               <div style={{ fontSize: 13, fontWeight: 700, color: '#f9fafb', marginTop: 8, position: 'relative' }}>{stat.label}</div>
               <div style={{ fontSize: 11, color: '#4b5563', marginTop: 4, position: 'relative' }}>{stat.sub}</div>
             </div>
@@ -548,12 +548,12 @@ function AuditLedger() {
         )}
 
         {/* Bottom CTA */}
-        <div style={{ marginTop: 40, padding: 28, background: 'rgba(16,185,129,0.05)', border: '1px solid rgba(16,185,129,0.15)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap' }}>
-          <div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#f9fafb', marginBottom: 4 }}>Don{'\u2019'}t trust us. Verify it yourself.</div>
-            <div style={{ fontSize: 13, color: '#4b5563' }}>Every receipt has a public URL. Open any hash. Verify the chain. Nothing to hide.</div>
+        <div style={{ marginTop: 32, padding: '20px', background: 'rgba(16,185,129,0.05)', border: '1px solid rgba(16,185,129,0.15)', borderRadius: 12 }}>
+          <div style={{ marginBottom: 12 }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: '#f9fafb', marginBottom: 4 }}>Don{'\u2019'}t trust us. Verify it yourself.</div>
+            <div style={{ fontSize: 12, color: '#4b5563' }}>Every receipt has a public URL. Open any hash. Verify the chain.</div>
           </div>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', flexShrink: 0 }}>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <a href="https://verify.itechsmart.dev" target="_blank" rel="noopener noreferrer" style={{ background: '#10b981', color: '#000', padding: '10px 20px', borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: 13 }}>Verify a Receipt {'\u2192'}</a>
             <a href="https://itechsmart.dev/proof" target="_blank" rel="noopener noreferrer" style={{ background: 'transparent', color: '#10b981', padding: '10px 20px', borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: 13, border: '1px solid rgba(16,185,129,0.3)' }}>Full Proof Ledger {'\u2197'}</a>
           </div>
@@ -1097,8 +1097,8 @@ export default function GetITechSmartHome() {
         {/* ══ FREE SCAN CTA ════════════════════════════════════════════════ */}
         <div style={{ background:'rgba(153,51,255,0.06)', borderTop:'1px solid rgba(153,51,255,0.14)', borderBottom:'1px solid rgba(153,51,255,0.14)', padding:'40px 20px', textAlign:'center' }}>
           <h3 className="display display-md" style={{ marginBottom:12 }}>Run this on your environment in under 60 seconds.</h3>
-          <a href="https://itechsmart.dev/pulse" className="btn-cta" style={{ margin:'0 auto' }}>
-            Run Free Production Scan → See What YOUR Infrastructure Would Fix Automatically
+          <a href="https://itechsmart.dev/pulse" className="btn-cta" style={{ margin:'0 auto', maxWidth:'90vw', textAlign:'center' }}>
+            Run Free Production Scan {'\u2192'}
           </a>
           <p style={{ fontSize:11, color:'rgba(255,255,255,0.2)', marginTop:12 }}>No setup · No risk · Results in 2 minutes</p>
         </div>
