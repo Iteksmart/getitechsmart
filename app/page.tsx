@@ -1155,7 +1155,7 @@ export default function GetITechSmartHome() {
             ))}
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-            <img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception Program Member" style={{ height:28, opacity:0.7 }} />
+            <img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception Program Member" style={{ height:24, width:'auto', opacity:0.8, flexShrink:0 }} />
             <span style={{ fontSize:11, color:'rgba(255,255,255,0.18)' }}>{'\u00A9'} 2026 iTechSmart Inc.</span>
           </div>
         </footer>
