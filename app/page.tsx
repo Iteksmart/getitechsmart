@@ -214,9 +214,9 @@ function Trust() {
             </div>
           ))}
         </div>
-        <div style={{ background:BG2,border:"1px solid rgba(255,255,255,0.06)",borderRadius:10,padding:"14px 20px",display:"inline-flex",alignItems:"center",gap:10 }}>
-          <span style={{ color:TEXT2,fontSize:10,fontWeight:600,letterSpacing:"1px" }}>LATEST ANCHOR</span>
-          <code style={{ color:ACCENT,fontSize:11 }}>btc:871204:9f3c4d8a2b1e7c5f9a3b6d2e8c1f4a7b09e5d3c8ab17</code>
+        <div style={{ background:BG2,border:"1px solid rgba(255,255,255,0.06)",borderRadius:10,padding:"14px 16px",maxWidth:"100%" }}>
+          <span style={{ color:TEXT2,fontSize:10,fontWeight:600,letterSpacing:"1px",display:"block",marginBottom:6 }}>LATEST ANCHOR</span>
+          <code style={{ color:ACCENT,fontSize:11,wordBreak:"break-all",lineHeight:1.6,display:"block" }}>btc:871204:9f3c4d8a2b1e7c5f9a3b6d2e8c1f4a7b09e5d3c8ab17</code>
         </div>
       </div>
     </section>
