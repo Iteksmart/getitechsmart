@@ -1156,6 +1156,38 @@ export default function GetITechSmartHome() {
           </div>
         </section>
 
+        {/* ══ PUBLIC API ══════════════════════════════════════════════════ */}
+        <section style={{ padding:'48px 20px' }}>
+          <div style={{ maxWidth:900, margin:'0 auto', background:'rgba(6,182,212,0.04)', border:'1px solid rgba(6,182,212,0.15)', borderRadius:16, padding:'clamp(24px, 4vw, 40px)' }}>
+            <div style={{ fontSize:11, fontWeight:700, color:'#06b6d4', letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:12 }}>Public API v1</div>
+            <h2 className="display display-md" style={{ marginBottom:12 }}>Connect Your Platform to UAIO</h2>
+            <p style={{ fontSize:15, color:'var(--muted)', lineHeight:1.6, marginBottom:24, maxWidth:500 }}>
+              Send an incident. Get autonomous classification + Bitcoin-anchored receipt. Free tier {'\u2014'} no key required.
+            </p>
+            <div style={{ fontFamily:'monospace', fontSize:12, background:'rgba(0,0,0,0.4)', border:'1px solid #1f2937', borderRadius:8, padding:14, color:'#06b6d4', marginBottom:24, overflowX:'auto' }}>
+              {'curl -X POST https://api.itechsmart.dev/v1/classify \\\n  -d \'{"description":"Container OOM killed"}\''}
+            </div>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap:8, marginBottom:20 }}>
+              {[
+                { m:'POST', p:'/v1/classify', d:'RAG classification' },
+                { m:'POST', p:'/v1/validate', d:'Guardrails check' },
+                { m:'GET',  p:'/v1/ledger',   d:'ProofLink ledger' },
+                { m:'GET',  p:'/v1/health',   d:'Platform status' },
+              ].map((ep, i) => (
+                <div key={i} style={{ display:'flex', gap:6, alignItems:'center', background:'rgba(0,0,0,0.3)', border:'1px solid #1f2937', borderRadius:8, padding:'8px 10px' }}>
+                  <span style={{ fontSize:9, fontWeight:700, color:'#06b6d4', background:'rgba(6,182,212,0.1)', padding:'2px 5px', borderRadius:3 }}>{ep.m}</span>
+                  <code style={{ fontSize:11, color:'#e5e7eb', flex:1 }}>{ep.p}</code>
+                  <span style={{ fontSize:10, color:'#6b7280' }}>{ep.d}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+              <a href="https://api.itechsmart.dev/docs" target="_blank" rel="noopener noreferrer" style={{ background:'#06b6d4', color:'#fff', padding:'10px 20px', borderRadius:8, fontWeight:700, fontSize:13, textDecoration:'none' }}>API Docs {'\u2192'}</a>
+              <a href="https://api.itechsmart.dev/v1/health" target="_blank" rel="noopener noreferrer" style={{ background:'transparent', color:'#06b6d4', padding:'10px 20px', borderRadius:8, fontWeight:700, fontSize:13, textDecoration:'none', border:'1px solid rgba(6,182,212,0.3)' }}>Live Health {'\u2192'}</a>
+            </div>
+          </div>
+        </section>
+
         {/* ══ FINAL CTA ════════════════════════════════════════════════════ */}
         <section className="section">
           <div style={{ maxWidth:680, margin:'0 auto', textAlign:'center' }}>
