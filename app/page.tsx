@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const BG = "#0f0f12";
 const BG2 = "#141419";
@@ -43,15 +43,34 @@ function Nav() {
 }
 
 /* ── HERO ─────────────────────────────────────────────────────────────────── */
+const CYCLE = ["Fires.","Incidents.","Outages.","Tickets.","Alert Fatigue."];
+
 function Hero() {
+  const [ci, setCi] = useState(0);
+  const [show, setShow] = useState(true);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setShow(false);
+      setTimeout(() => { setCi(i => (i + 1) % CYCLE.length); setShow(true); }, 300);
+    }, 2800);
+    return () => clearInterval(t);
+  }, []);
   return (
     <section style={{ background:BG,minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:"clamp(80px,12vh,120px) clamp(20px,5vw,80px) 0",position:"relative" }}>
       <div style={{ maxWidth:1100,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr",gap:48,textAlign:"center" }}>
         <div>
           <p style={{ color:TEXT2,fontSize:12,fontWeight:500,letterSpacing:"2px",textTransform:"uppercase",marginBottom:20 }}>UNIFIED AUTONOMOUS IT OPERATIONS</p>
-          <h1 style={{ fontSize:"clamp(40px,7vw,72px)",fontWeight:700,color:W,lineHeight:1.08,margin:"0 0 24px",letterSpacing:"-2px" }}>
-            Stop Triaging.<br/>Start Executing.
+          <h1 style={{ fontSize:"clamp(40px,7vw,72px)",fontWeight:700,color:W,lineHeight:1.08,margin:"0 0 8px",letterSpacing:"-2px" }}>
+            Stop Fighting IT
           </h1>
+          <div style={{ overflow:"hidden",marginBottom:8 }}>
+            <div style={{ transition:"transform 0.35s cubic-bezier(.22,1,.36,1), opacity 0.3s",transform:show?"translateY(0)":"translateY(30px)",opacity:show?1:0 }}>
+              <h1 style={{ fontSize:"clamp(40px,7vw,72px)",fontWeight:700,color:ACCENT,lineHeight:1.08,margin:0,letterSpacing:"-2px" }}>{CYCLE[ci]}</h1>
+            </div>
+          </div>
+          <h2 style={{ fontSize:"clamp(28px,4vw,48px)",fontWeight:700,color:ACCENT,margin:"0 0 24px",letterSpacing:"-1px",opacity:0.7 }}>
+            Start Executing.
+          </h2>
           <p style={{ fontSize:"clamp(15px,1.8vw,18px)",color:TEXT,lineHeight:1.7,maxWidth:640,margin:"0 auto 36px" }}>
             The world{"\u2019"}s first verifiable autonomous execution system for infrastructure. Sits on top of your existing tools. Detects, fixes, and cryptographically proves resolution in under 20 seconds.
           </p>
@@ -155,7 +174,7 @@ function DetectFixProve() {
               <p style={{ color:TEXT2,fontSize:10,fontWeight:600,letterSpacing:"2px",margin:"0 0 8px" }}>{c.n}</p>
               <div style={{ display:"flex",alignItems:"center",gap:10,marginBottom:16 }}>
                 <h3 style={{ fontSize:24,fontWeight:700,color:W,margin:0 }}>{c.title}</h3>
-                {c.tag&&<span style={{ background:"rgba(87,94,207,0.15)",border:"1px solid rgba(87,94,207,0.25)",borderRadius:4,padding:"2px 8px",fontSize:9,fontWeight:700,color:ACCENT,letterSpacing:"1px" }}>{c.tag}</span>}
+                {c.tag&&<span style={{ background:"rgba(153,51,255,0.15)",border:"1px solid rgba(153,51,255,0.25)",borderRadius:4,padding:"2px 8px",fontSize:9,fontWeight:700,color:ACCENT,letterSpacing:"1px" }}>{c.tag}</span>}
               </div>
               <p style={{ color:TEXT,fontSize:13,lineHeight:1.7,margin:0 }}>{c.body}</p>
             </div>
@@ -229,11 +248,11 @@ function Onboarding() {
             </div>
           ))}
         </div>
-        <div style={{ display:"flex",gap:14,flexWrap:"wrap" }}>
+        <div style={{ display:"flex",gap:14,flexWrap:"wrap",justifyContent:"center" }}>
           <a href="https://itechsmart.dev/pulse" target="_blank" rel="noopener noreferrer" style={{ background:ACCENT,color:W,borderRadius:8,padding:"13px 28px",fontSize:14,fontWeight:600,textDecoration:"none" }}>Deploy Free Pulse Scanner {"\u2192"}</a>
           <a href="https://calendly.com/djuane-itechsmart/new-meeting" target="_blank" rel="noopener noreferrer" style={{ color:TEXT,border:"1px solid rgba(255,255,255,0.1)",borderRadius:8,padding:"13px 28px",fontSize:14,fontWeight:500,textDecoration:"none" }}>Book a Demo</a>
         </div>
-        <p style={{ color:TEXT2,fontSize:11,marginTop:12 }}>No credit card required</p>
+        <p style={{ color:TEXT2,fontSize:11,marginTop:12,textAlign:"center" }}>No credit card required</p>
       </div>
     </section>
   );
@@ -241,24 +260,35 @@ function Onboarding() {
 
 /* ── FOOTER ───────────────────────────────────────────────────────────────── */
 function Footer() {
+  const cols = [
+    { t:"PLATFORM",links:[["Main Platform","https://itechsmart.dev"],["Free Pulse Scanner","https://itechsmart.dev/pulse"],["Break-It Challenge","https://itechsmart.dev/break-it"],["Integrations","https://itechsmart.dev/integrations"],["Pricing","https://itechsmart.dev/pricing"],["Pitch Deck","https://itechsmart.dev/pitch-deck"]] },
+    { t:"PROOF & TRUST",links:[["Verify a Receipt","https://verify.itechsmart.dev"],["ProofLink Ledger","https://itechsmart.dev/proof"],["Bitcoin Verification","https://opentimestamps.org"],["Credibility","https://itechsmart.dev/credibility"],["Public API Docs","https://api.itechsmart.dev/docs"],["API Health","https://api.itechsmart.dev/v1/health"]] },
+    { t:"RESOURCES",links:[["Whitepaper v3.6","https://whitepaper.itechsmart.dev"],["Changelog","https://itechsmart.dev/changelog"],["Blog","https://itechsmart.dev/blog"],["State of Autonomous IT","https://itechsmart.dev/state-of-autonomous-it-2026"],["Security","https://itechsmart.dev/security"],["FAQ","https://itechsmart.dev/faq"]] },
+    { t:"COMPANY",links:[["About","https://itechsmart.dev/about"],["Press Release","https://itechsmart.dev/press-release"],["Executive Bios","https://itechsmart.dev/news/executive-bios"],["News","https://itechsmart.dev/news"],["Contact","https://itechsmart.dev/contact"],["Book a Call","https://calendly.com/djuane-itechsmart/new-meeting"]] },
+  ];
   return (
-    <footer style={{ background:BG,borderTop:"1px solid rgba(255,255,255,0.04)",padding:"clamp(32px,5vw,48px) clamp(20px,5vw,80px)" }}>
-      <div style={{ maxWidth:1100,margin:"0 auto",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16 }}>
-        <div style={{ display:"flex",alignItems:"center",gap:14 }}>
-          <img src="/itechsmart_icon.png" alt="iTechSmart" width={20} height={20} style={{ borderRadius:"50%" }} />
-          <div>
-            <span style={{ color:W,fontWeight:600,fontSize:14 }}>iTechSmart Inc.</span>
-            <p style={{ color:TEXT2,fontSize:10,margin:"2px 0 0",letterSpacing:"0.5px" }}>UAIO {"\u2014"} Unified Autonomous IT Operations</p>
-          </div>
-        </div>
-        <div style={{ display:"flex",alignItems:"center",gap:16,flexWrap:"wrap" }}>
-          {[["Platform","https://itechsmart.dev"],["Whitepaper","https://whitepaper.itechsmart.dev"],["Verify","https://verify.itechsmart.dev"],["API","https://api.itechsmart.dev/docs"],["News","https://itechsmart.dev/news"],["Contact","https://itechsmart.dev/contact"]].map(([l,h])=>(
-            <a key={l} href={h} target="_blank" rel="noopener noreferrer" style={{ color:TEXT2,fontSize:11,textDecoration:"none" }}>{l}</a>
+    <footer style={{ background:BG,borderTop:"1px solid rgba(255,255,255,0.04)",padding:"clamp(40px,6vw,64px) clamp(20px,5vw,80px) clamp(24px,3vw,40px)" }}>
+      <div style={{ maxWidth:1100,margin:"0 auto" }}>
+        <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 200px), 1fr))",gap:"clamp(24px,3vw,40px)",marginBottom:40 }}>
+          {cols.map(c=>(
+            <div key={c.t}>
+              <p style={{ color:ACCENT,fontSize:10,fontWeight:700,letterSpacing:"1.5px",margin:"0 0 14px" }}>{c.t}</p>
+              {c.links.map(([l,h])=>(
+                <a key={l} href={h} target="_blank" rel="noopener noreferrer" style={{ display:"block",color:TEXT2,fontSize:12,textDecoration:"none",marginBottom:9,lineHeight:1.4 }}>{l}</a>
+              ))}
+            </div>
           ))}
         </div>
-        <div style={{ display:"flex",alignItems:"center",gap:12 }}>
-          <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer"><img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception" style={{ height:18,width:"auto" }} /></a>
-          <span style={{ color:TEXT2,fontSize:10 }}>CAGE 172W2 {"\u00B7"} SDVOSB {"\u00B7"} SDB {"\u00B7"} {"\u00A9"} 2026</span>
+        <div style={{ borderTop:"1px solid rgba(255,255,255,0.04)",paddingTop:24,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16 }}>
+          <div style={{ display:"flex",alignItems:"center",gap:12 }}>
+            <img src="/itechsmart_icon.png" alt="iTechSmart" width={20} height={20} style={{ borderRadius:"50%" }} />
+            <span style={{ color:W,fontWeight:600,fontSize:13 }}>iTechSmart Inc.</span>
+            <span style={{ color:TEXT2,fontSize:10 }}>UAIO {"\u2014"} Unified Autonomous IT Operations</span>
+          </div>
+          <div style={{ display:"flex",alignItems:"center",gap:12 }}>
+            <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer"><img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception" style={{ height:18,width:"auto" }} /></a>
+            <span style={{ color:TEXT2,fontSize:10 }}>CAGE 172W2 {"\u00B7"} SDVOSB {"\u00B7"} SDB {"\u00B7"} {"\u00A9"} 2026</span>
+          </div>
         </div>
       </div>
     </footer>
