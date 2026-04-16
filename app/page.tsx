@@ -20,10 +20,9 @@ function Nav() {
           <img src="/itechsmart_icon.png" alt="iTechSmart" width={28} height={28} style={{ borderRadius:"50%" }} />
           <span style={{ color:W,fontWeight:700,fontSize:17 }}>iTechSmart</span>
         </a>
-        <div style={{ display:"flex",alignItems:"center",gap:5,background:"#111",border:"1px solid rgba(118,185,0,0.4)",borderRadius:5,padding:"3px 8px" }}>
-          <div style={{ width:6,height:6,borderRadius:"50%",background:"#76b900" }}/>
-          <span style={{ color:"#76b900",fontSize:10,fontWeight:600 }}>NVIDIA Inception</span>
-        </div>
+        <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer">
+          <img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception Program" style={{ height:22,width:"auto" }} />
+        </a>
       </div>
       <div className="nav-links" style={{ display:"flex",gap:32 }}>
         {[["Platform","https://itechsmart.dev"],["API","https://api.itechsmart.dev/docs"],["Whitepaper","https://whitepaper.itechsmart.dev"],["Compliance","https://itechsmart.dev/credibility"]].map(([l,h])=>(
@@ -224,10 +223,9 @@ function Footer() {
             <img src="/itechsmart_icon.png" alt="iTechSmart" width={22} height={22} style={{ borderRadius:"50%" }} />
             <span style={{ color:W,fontWeight:700,fontSize:14 }}>iTechSmart Inc.</span>
           </div>
-          <div style={{ display:"flex",alignItems:"center",gap:5,background:"#111",border:"1px solid rgba(118,185,0,0.4)",borderRadius:5,padding:"3px 8px" }}>
-            <div style={{ width:6,height:6,borderRadius:"50%",background:"#76b900" }}/>
-            <span style={{ color:"#76b900",fontSize:10,fontWeight:600 }}>NVIDIA Inception</span>
-          </div>
+          <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer">
+            <img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception Program" style={{ height:20,width:"auto" }} />
+          </a>
         </div>
         <p style={{ color:"rgba(139,145,154,0.5)",fontSize:11,margin:0 }}>SDVOSB {"\u00B7"} CAGE: 172W2 {"\u00B7"} UEI: ZCPFX4N86G36 {"\u00B7"} F6S #6 {"\u00B7"} {"\u00A9"} 2026 iTechSmart Inc.</p>
       </div>
