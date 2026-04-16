@@ -1,78 +1,100 @@
 "use client";
 import React, { useState } from "react";
 
-const P = "#6b00ff";
-const P2 = "#9933ff";
-const BG = "#05050f";
-const BG2 = "#08031a";
-const G = "#8b919a";
-const GR = "#2bd98c";
-const OR = "#ff8c33";
-const BL = "#3366ff";
-const W = "#fafaff";
+const BG = "#0f0f12";
+const BG2 = "#141419";
+const BG3 = "#1a1a20";
+const TEXT = "#c5c1b9";
+const TEXT2 = "#8a8780";
+const ACCENT = "#575ECF";
+const W = "#eceae5";
+const GREEN = "#4ade80";
+const PURPLE = "#6b00ff";
 
+/* ── NAV ─────────────────────────────────────────────────────────────────── */
 function Nav() {
   const [open, setOpen] = useState(false);
   return (
-    <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:100,background:"rgba(5,5,15,0.88)",backdropFilter:"blur(12px)",borderBottom:"1px solid rgba(107,0,255,0.15)",height:64,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 clamp(16px,4vw,80px)" }}>
-      <div style={{ display:"flex",alignItems:"center",gap:12 }}>
-        <a href="/" style={{ display:"flex",alignItems:"center",gap:8,textDecoration:"none" }}>
-          <img src="/itechsmart_icon.png" alt="iTechSmart" width={28} height={28} style={{ borderRadius:"50%" }} />
-          <span style={{ color:W,fontWeight:700,fontSize:17 }}>iTechSmart</span>
-        </a>
-        <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer">
-          <img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception Program" style={{ height:22,width:"auto" }} />
-        </a>
-      </div>
-      <div className="nav-links" style={{ display:"flex",gap:32 }}>
-        {[["Platform","https://itechsmart.dev"],["API","https://api.itechsmart.dev/docs"],["Whitepaper","https://whitepaper.itechsmart.dev"],["Compliance","https://itechsmart.dev/credibility"]].map(([l,h])=>(
-          <a key={l} href={h} target="_blank" rel="noopener noreferrer" style={{ color:G,fontSize:13,textDecoration:"none",fontWeight:500 }}>{l}</a>
+    <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:100,background:"rgba(15,15,18,0.92)",backdropFilter:"blur(16px)",borderBottom:"1px solid rgba(255,255,255,0.04)",height:56,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 clamp(16px,4vw,48px)" }}>
+      <a href="/" style={{ display:"flex",alignItems:"center",gap:8,textDecoration:"none" }}>
+        <img src="/itechsmart_icon.png" alt="iTechSmart" width={24} height={24} style={{ borderRadius:"50%" }} />
+        <span style={{ color:W,fontWeight:600,fontSize:15,letterSpacing:"-0.3px" }}>iTechSmart <span style={{ color:TEXT2,fontWeight:400,fontSize:12 }}>UAIO</span></span>
+      </a>
+      <div className="dl" style={{ display:"flex",gap:28,alignItems:"center" }}>
+        {[["Integration","#integration"],["The Loop","#loop"],["Trust","#trust"],["Deploy","#deploy"]].map(([l,h])=>(
+          <a key={l} href={h} style={{ color:TEXT2,fontSize:12,textDecoration:"none",fontWeight:500,letterSpacing:"0.5px",textTransform:"uppercase" }}>{l}</a>
         ))}
+        <a href="https://api.itechsmart.dev/docs" target="_blank" rel="noopener noreferrer" style={{ color:TEXT2,fontSize:12,textDecoration:"none",fontWeight:500,letterSpacing:"0.5px",textTransform:"uppercase" }}>API</a>
       </div>
-      <a href="https://calendly.com/djuane-itechsmart/new-meeting" target="_blank" rel="noopener noreferrer" className="nav-cta" style={{ background:P,color:W,borderRadius:8,padding:"9px 18px",fontSize:13,fontWeight:600,textDecoration:"none" }}>Book a Demo</a>
-      <button onClick={()=>setOpen(!open)} className="nav-burger" style={{ display:"none",background:"none",border:`1px solid ${P}40`,borderRadius:8,padding:"8px 12px",color:W,fontSize:18,cursor:"pointer" }}>{open?"\u2715":"\u2630"}</button>
-      {open && (
-        <div className="nav-mobile" style={{ position:"absolute",top:64,left:0,right:0,background:BG2,borderBottom:`1px solid ${P}30`,padding:20,display:"flex",flexDirection:"column",gap:16 }}>
-          {[["Platform","https://itechsmart.dev"],["API","https://api.itechsmart.dev/docs"],["Whitepaper","https://whitepaper.itechsmart.dev"],["Compliance","https://itechsmart.dev/credibility"]].map(([l,h])=>(
-            <a key={l} href={h} target="_blank" rel="noopener noreferrer" style={{ color:G,fontSize:15,textDecoration:"none" }}>{l}</a>
-          ))}
-          <a href="https://calendly.com/djuane-itechsmart/new-meeting" target="_blank" rel="noopener noreferrer" style={{ background:P,color:W,borderRadius:8,padding:"12px",fontSize:14,fontWeight:600,textDecoration:"none",textAlign:"center" }}>Book a Demo</a>
-        </div>
-      )}
-      <style>{`
-        @media(max-width:768px){
-          .nav-links,.nav-cta{display:none!important}
-          .nav-burger{display:block!important}
-        }
-      `}</style>
+      <div style={{ display:"flex",alignItems:"center",gap:12 }}>
+        <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer"><img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception" style={{ height:18,width:"auto" }} /></a>
+        <a href="https://calendly.com/djuane-itechsmart/new-meeting" target="_blank" rel="noopener noreferrer" className="nc" style={{ background:ACCENT,color:W,borderRadius:6,padding:"7px 16px",fontSize:12,fontWeight:600,textDecoration:"none",letterSpacing:"0.3px" }}>Book a Demo</a>
+      </div>
+      <button onClick={()=>setOpen(!open)} className="nb" style={{ display:"none",background:"none",border:`1px solid rgba(255,255,255,0.1)`,borderRadius:6,padding:"6px 10px",color:W,fontSize:16,cursor:"pointer" }}>{open?"\u2715":"\u2630"}</button>
+      {open&&<div style={{ position:"absolute",top:56,left:0,right:0,background:BG2,borderBottom:"1px solid rgba(255,255,255,0.04)",padding:20,display:"flex",flexDirection:"column",gap:16 }}>
+        {[["Integration","#integration"],["The Loop","#loop"],["Trust","#trust"],["Deploy","#deploy"],["API","https://api.itechsmart.dev/docs"]].map(([l,h])=>(
+          <a key={l} href={h} onClick={()=>setOpen(false)} style={{ color:TEXT,fontSize:14,textDecoration:"none" }}>{l}</a>
+        ))}
+        <a href="https://calendly.com/djuane-itechsmart/new-meeting" target="_blank" rel="noopener noreferrer" style={{ background:ACCENT,color:W,borderRadius:6,padding:"12px",fontSize:14,fontWeight:600,textDecoration:"none",textAlign:"center" }}>Book a Demo</a>
+      </div>}
+      <style>{`@media(max-width:768px){.dl,.nc{display:none!important}.nb{display:block!important}}`}</style>
     </nav>
   );
 }
 
+/* ── HERO ─────────────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section style={{ background:BG,minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"120px clamp(20px,5vw,80px) 0",position:"relative",overflow:"hidden" }}>
-      <div style={{ position:"absolute",top:-200,left:"50%",transform:"translateX(-50%)",width:900,height:600,borderRadius:"50%",background:"rgba(107,0,255,0.15)",filter:"blur(120px)",pointerEvents:"none" }}/>
-      <div style={{ display:"inline-flex",alignItems:"center",gap:8,background:"rgba(107,0,255,0.12)",border:"1px solid rgba(107,0,255,0.3)",borderRadius:24,padding:"7px 16px",marginBottom:28,flexWrap:"wrap",justifyContent:"center" }}>
-        <div style={{ width:7,height:7,borderRadius:"50%",background:P2 }}/>
-        <span style={{ color:P2,fontSize:11,fontWeight:600 }}>NVIDIA Inception {"\u00B7"} SDVOSB {"\u00B7"} CAGE 172W2 {"\u00B7"} F6S #6 Globally</span>
+    <section style={{ background:BG,minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:"clamp(80px,12vh,120px) clamp(20px,5vw,80px) 0",position:"relative" }}>
+      <div style={{ maxWidth:1100,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr",gap:48,textAlign:"center" }}>
+        <div>
+          <p style={{ color:TEXT2,fontSize:12,fontWeight:500,letterSpacing:"2px",textTransform:"uppercase",marginBottom:20 }}>UNIFIED AUTONOMOUS IT OPERATIONS</p>
+          <h1 style={{ fontSize:"clamp(40px,7vw,72px)",fontWeight:700,color:W,lineHeight:1.08,margin:"0 0 24px",letterSpacing:"-2px" }}>
+            Stop Triaging.<br/>Start Executing.
+          </h1>
+          <p style={{ fontSize:"clamp(15px,1.8vw,18px)",color:TEXT,lineHeight:1.7,maxWidth:640,margin:"0 auto 36px" }}>
+            The world{"\u2019"}s first verifiable autonomous execution system for infrastructure. Sits on top of your existing tools. Detects, fixes, and cryptographically proves resolution in under 20 seconds.
+          </p>
+          <div style={{ display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",marginBottom:48 }}>
+            <a href="https://itechsmart.dev/break-it" target="_blank" rel="noopener noreferrer" style={{ background:ACCENT,color:W,borderRadius:8,padding:"13px 28px",fontSize:14,fontWeight:600,textDecoration:"none",letterSpacing:"0.3px" }}>{"\u25B6"}  Watch a Live Fix <span style={{ color:"rgba(255,255,255,0.5)",fontSize:11 }}>20 SEC</span></a>
+            <a href="https://verify.itechsmart.dev" target="_blank" rel="noopener noreferrer" style={{ background:"transparent",color:TEXT,border:"1px solid rgba(255,255,255,0.1)",borderRadius:8,padding:"13px 28px",fontSize:14,fontWeight:500,textDecoration:"none" }}>Verify a Ledger Receipt</a>
+          </div>
+
+          {/* Live Receipt Card */}
+          <div style={{ maxWidth:480,margin:"0 auto",background:BG2,border:"1px solid rgba(255,255,255,0.06)",borderRadius:12,overflow:"hidden",textAlign:"left" }}>
+            <div style={{ padding:"14px 20px",borderBottom:"1px solid rgba(255,255,255,0.04)",display:"flex",justifyContent:"space-between",alignItems:"center" }}>
+              <div style={{ display:"flex",alignItems:"center",gap:8 }}>
+                <div style={{ width:6,height:6,borderRadius:"50%",background:GREEN }}/>
+                <span style={{ color:GREEN,fontSize:11,fontWeight:600 }}>Live ProofLink Receipt</span>
+              </div>
+              <span style={{ color:TEXT2,fontSize:10,fontFamily:"monospace" }}>#A7F2-91C4</span>
+            </div>
+            {[
+              ["ALERT","wazuh.cpu.spike \u2192 web-prod-04","detected"],
+              ["DIAGNOSIS","runaway nginx worker (PID 8821)","reasoned"],
+              ["ACTION","ssh exec: systemctl restart nginx","executed"],
+              ["ANCHOR","opentimestamps \u2192 btc block 871,204","proven"],
+            ].map(([label,value,status])=>(
+              <div key={label} style={{ padding:"10px 20px",borderBottom:"1px solid rgba(255,255,255,0.03)",display:"flex",justifyContent:"space-between",alignItems:"center",gap:12 }}>
+                <span style={{ color:TEXT2,fontSize:11,fontWeight:600,letterSpacing:"0.5px",flexShrink:0,minWidth:70 }}>{label}</span>
+                <span style={{ color:TEXT,fontSize:12,flex:1 }}>{value}</span>
+                <span style={{ color:ACCENT,fontSize:10,fontWeight:600,flexShrink:0 }}>{status}</span>
+              </div>
+            ))}
+            <div style={{ padding:"12px 20px",display:"flex",justifyContent:"space-between",alignItems:"center" }}>
+              <span style={{ color:W,fontSize:13,fontWeight:600 }}>Mean Time to Resolve: 17.4s {"\u2713"} Verified</span>
+              <span style={{ color:TEXT2,fontSize:10,fontFamily:"monospace" }}>sha256: 9f3c...ab17</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <h1 style={{ fontSize:"clamp(40px,7vw,80px)",fontWeight:900,color:W,lineHeight:1.08,margin:"0 0 24px",maxWidth:900 }}>
-        Stop Triaging.<br/>Start Executing.
-      </h1>
-      <p style={{ fontSize:"clamp(16px,2vw,20px)",color:G,lineHeight:1.7,maxWidth:720,margin:"0 0 36px" }}>
-        The world{"\u2019"}s first verifiable autonomous execution system for infrastructure. Sits on top of your existing tools. Detects, fixes, and cryptographically proves resolution in under 20 seconds.
-      </p>
-      <div style={{ display:"flex",gap:14,flexWrap:"wrap",justifyContent:"center",marginBottom:16 }}>
-        <a href="https://itechsmart.dev/break-it" target="_blank" rel="noopener noreferrer" style={{ background:P,color:W,borderRadius:10,padding:"14px 28px",fontSize:15,fontWeight:600,textDecoration:"none",boxShadow:"0 0 40px rgba(107,0,255,0.4)" }}>{"\u25B6"}  Watch a Live Fix</a>
-        <a href="https://verify.itechsmart.dev" target="_blank" rel="noopener noreferrer" style={{ background:"rgba(255,255,255,0.05)",color:W,border:"1px solid rgba(255,255,255,0.15)",borderRadius:10,padding:"14px 28px",fontSize:15,fontWeight:600,textDecoration:"none" }}>{"\uD83D\uDD0D"}  Verify a Receipt</a>
-      </div>
-      <p style={{ color:"rgba(139,145,154,0.6)",fontSize:12 }}>No credit card {"\u00B7"} Free Pulse scanner {"\u00B7"} Air-gapped available</p>
-      <div style={{ marginTop:64,width:"100vw",borderTop:"1px solid rgba(107,0,255,0.2)",background:BG2,padding:"16px clamp(20px,5vw,80px)",display:"flex",justifyContent:"center",gap:0,flexWrap:"wrap" }}>
-        {["\uD83C\uDFDB\uFE0F  Trusted by Federal (CAGE 172W2)","\u20BF  Bitcoin-Anchored Proof","\u26A1  MTTR: 20 Seconds","\uD83D\uDEE1\uFE0F  SDVOSB \u00B7 Minority-Owned"].map((t,i)=>(
+
+      {/* Trust Bar */}
+      <div style={{ position:"absolute",bottom:0,left:0,right:0,borderTop:"1px solid rgba(255,255,255,0.04)",background:BG2,padding:"14px clamp(20px,5vw,80px)",display:"flex",justifyContent:"center",gap:0,flexWrap:"wrap" }}>
+        {["Trusted by Federal Agencies","CAGE 172W2","Bitcoin-Anchored Proof","MTTR: 20s","SDVOSB Certified","FedRAMP / CMMC Ready"].map((t,i)=>(
           <React.Fragment key={i}>
-            <span style={{ color:G,fontSize:12,padding:"4px clamp(8px,2vw,32px)",whiteSpace:"nowrap" }}>{t}</span>
-            {i<3&&<span style={{ color:"rgba(107,0,255,0.3)",fontSize:18 }}>|</span>}
+            <span style={{ color:TEXT2,fontSize:11,padding:"2px clamp(8px,1.5vw,20px)",whiteSpace:"nowrap" }}>{t}</span>
+            {i<5&&<span style={{ color:"rgba(255,255,255,0.12)",fontSize:11 }}>{"\u25C6"}</span>}
           </React.Fragment>
         ))}
       </div>
@@ -80,162 +102,173 @@ function Hero() {
   );
 }
 
+/* ── INTEGRATION ──────────────────────────────────────────────────────────── */
 function Chip({label}:{label:string}) {
-  return <span style={{ background:"rgba(107,0,255,0.15)",border:"1px solid rgba(107,0,255,0.25)",borderRadius:8,padding:"5px 11px",fontSize:12,fontWeight:500,color:W,whiteSpace:"nowrap" }}>{label}</span>;
+  return <span style={{ background:"rgba(87,94,207,0.12)",border:"1px solid rgba(87,94,207,0.2)",borderRadius:6,padding:"4px 10px",fontSize:11,fontWeight:500,color:TEXT }}>{label}</span>;
 }
 
 function Integration() {
   return (
-    <section style={{ background:BG,padding:"clamp(48px,8vw,100px) clamp(20px,5vw,80px)",textAlign:"center" }}>
-      <h2 style={{ fontSize:"clamp(28px,4vw,48px)",fontWeight:900,color:W,margin:"0 0 6px" }}>You Already Have the Sensors.</h2>
-      <h2 style={{ fontSize:"clamp(28px,4vw,48px)",fontWeight:900,color:P2,margin:"0 0 20px" }}>We Provide the Nervous System.</h2>
-      <p style={{ fontSize:16,color:G,lineHeight:1.7,maxWidth:700,margin:"0 auto 48px" }}>
-        Don{"\u2019"}t replace your stack. Upgrade it. iTechSmart ingests alerts from your existing tools, executes the remediation, and logs cryptographic proof into your ServiceNow or Jira tickets.
-      </p>
-      <div style={{ display:"flex",alignItems:"center",justifyContent:"center",gap:"clamp(12px,3vw,24px)",flexWrap:"wrap" }}>
-        <div style={{ background:"rgba(107,0,255,0.08)",border:"1px solid rgba(107,0,255,0.2)",borderRadius:14,padding:"20px 24px",maxWidth:260,textAlign:"left" }}>
-          <p style={{ color:P2,fontSize:10,fontWeight:700,letterSpacing:"1.5px",margin:"0 0 12px" }}>TELEMETRY SOURCES</p>
-          <div style={{ display:"flex",flexWrap:"wrap",gap:6 }}>{["Datadog","Wazuh","Splunk","Prometheus","PagerDuty","Grafana"].map(t=><Chip key={t} label={t}/>)}</div>
-        </div>
-        <div style={{ fontSize:24,fontWeight:700,color:P }}>{"\u2192"}</div>
-        <div style={{ background:"rgba(107,0,255,0.14)",border:`2px solid ${P}`,borderRadius:16,padding:"24px 28px",maxWidth:260,textAlign:"center",boxShadow:"0 0 40px rgba(107,0,255,0.3)" }}>
-          <div style={{ fontSize:32,marginBottom:6 }}>{"\uD83E\uDDE0"}</div>
-          <p style={{ color:W,fontWeight:700,fontSize:18,margin:"0 0 4px" }}>iTechSmart</p>
-          <p style={{ color:P2,fontSize:11,margin:"0 0 12px" }}>OctoAI {"\u00B7"} Ultra 253B {"\u00B7"} NeMo</p>
-          <span style={{ background:"rgba(107,0,255,0.25)",borderRadius:20,padding:"5px 12px",fontSize:10,fontWeight:600,color:W }}>AUTONOMOUS ENGINE</span>
-        </div>
-        <div style={{ fontSize:24,fontWeight:700,color:P }}>{"\u2192"}</div>
-        <div style={{ background:"rgba(107,0,255,0.08)",border:"1px solid rgba(107,0,255,0.2)",borderRadius:14,padding:"20px 24px",maxWidth:260,textAlign:"left" }}>
-          <p style={{ color:P2,fontSize:10,fontWeight:700,letterSpacing:"1.5px",margin:"0 0 12px" }}>ACTION & RECORD</p>
-          <div style={{ display:"flex",flexWrap:"wrap",gap:6 }}>{["AWS","Azure","GCP","ServiceNow","Jira","Slack","SSH","WinRM"].map(t=><Chip key={t} label={t}/>)}</div>
+    <section id="integration" style={{ background:BG,padding:"clamp(48px,8vw,100px) clamp(20px,5vw,80px)",borderTop:"1px solid rgba(255,255,255,0.04)" }}>
+      <div style={{ maxWidth:1100,margin:"0 auto" }}>
+        <p style={{ color:ACCENT,fontSize:11,fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",marginBottom:12 }}>02 {"\u00B7"} INTEGRATION REALITY</p>
+        <h2 style={{ fontSize:"clamp(28px,4vw,44px)",fontWeight:700,color:W,margin:"0 0 12px",letterSpacing:"-1px" }}>You already have the sensors.</h2>
+        <h2 style={{ fontSize:"clamp(28px,4vw,44px)",fontWeight:700,color:ACCENT,margin:"0 0 20px",letterSpacing:"-1px" }}>We provide the nervous system.</h2>
+        <p style={{ fontSize:15,color:TEXT,lineHeight:1.7,maxWidth:640,marginBottom:48 }}>
+          Don{"\u2019"}t replace your stack. Upgrade it. iTechSmart ingests alerts from your existing observability tools, autonomously executes remediation, and logs cryptographic proof into your ITSM tickets.
+        </p>
+        <div style={{ display:"flex",alignItems:"center",justifyContent:"center",gap:"clamp(12px,3vw,28px)",flexWrap:"wrap" }}>
+          <div style={{ background:BG2,border:"1px solid rgba(255,255,255,0.06)",borderRadius:12,padding:"20px 24px",maxWidth:240,textAlign:"left" }}>
+            <p style={{ color:ACCENT,fontSize:9,fontWeight:700,letterSpacing:"2px",margin:"0 0 12px" }}>INGEST</p>
+            <div style={{ display:"flex",flexWrap:"wrap",gap:6 }}>{["Datadog","Prometheus","Splunk","Wazuh"].map(t=><Chip key={t} label={t}/>)}</div>
+          </div>
+          <span style={{ color:ACCENT,fontSize:20,fontWeight:300 }}>{"\u2192"}</span>
+          <div style={{ background:BG2,border:`1.5px solid ${ACCENT}`,borderRadius:14,padding:"24px 28px",maxWidth:240,textAlign:"center",boxShadow:`0 0 40px rgba(87,94,207,0.15)` }}>
+            <p style={{ color:W,fontWeight:700,fontSize:16,margin:"0 0 4px" }}>iTechSmart Engine</p>
+            <p style={{ color:TEXT2,fontSize:11,margin:0 }}>OctoAI {"\u00B7"} Ultra 253B {"\u00B7"} NeMo RAG</p>
+          </div>
+          <span style={{ color:ACCENT,fontSize:20,fontWeight:300 }}>{"\u2192"}</span>
+          <div style={{ background:BG2,border:"1px solid rgba(255,255,255,0.06)",borderRadius:12,padding:"20px 24px",maxWidth:240,textAlign:"left" }}>
+            <p style={{ color:ACCENT,fontSize:9,fontWeight:700,letterSpacing:"2px",margin:"0 0 12px" }}>EXECUTE</p>
+            <div style={{ display:"flex",flexWrap:"wrap",gap:6 }}>{["AWS","Azure","ServiceNow","Slack"].map(t=><Chip key={t} label={t}/>)}</div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+/* ── DETECT FIX PROVE ────────────────────────────────────────────────────── */
 function DetectFixProve() {
-  const cols = [
-    { n:"01",icon:"\uD83D\uDCE1",title:"Detect",color:BL,body:"Ingest telemetry from your existing environment. Anomalies mapped using NVIDIA NeMo RAG against 131+ historical incidents." },
-    { n:"02",icon:"\u26A1",title:"Fix",color:P,body:"Root cause reasoning + autonomous remediation via SSH, WinRM, or API. OctoAI 8-agent engine powered by Nemotron Ultra 253B." },
-    { n:"03",icon:"\uD83D\uDD10",title:"Prove",color:OR,body:"Cryptographic receipt generated, Bitcoin-anchored via OpenTimestamps, attached to your ITSM ticket. Math, not promises." },
-  ];
   return (
-    <section style={{ background:BG2,padding:"clamp(48px,8vw,100px) clamp(20px,5vw,80px)",textAlign:"center",position:"relative" }}>
-      <div style={{ display:"inline-flex",alignItems:"center",gap:8,background:"rgba(43,217,140,0.12)",border:"1px solid rgba(43,217,140,0.3)",borderRadius:24,padding:"6px 14px",marginBottom:24 }}>
-        <span style={{ color:GR,fontSize:12,fontWeight:600 }}>THE 20-SECOND AUTONOMOUS LOOP</span>
-      </div>
-      <h2 style={{ fontSize:"clamp(32px,5vw,56px)",fontWeight:900,color:W,margin:"0 0 48px" }}>Detect. Fix. Prove.</h2>
-      <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 300px), 1fr))",gap:24,maxWidth:1140,margin:"0 auto" }}>
-        {cols.map(c=>(
-          <div key={c.n} style={{ background:"rgba(8,3,26,0.9)",border:`1px solid ${c.color}44`,borderRadius:16,padding:"28px 24px",textAlign:"left",boxShadow:`0 8px 32px ${c.color}18` }}>
-            <p style={{ color:c.color,fontSize:10,fontWeight:700,letterSpacing:"2px",margin:"0 0 10px",opacity:0.6 }}>{c.n}</p>
-            <p style={{ fontSize:22,fontWeight:700,color:c.color,margin:"0 0 14px" }}>{c.icon}  {c.title}</p>
-            <div style={{ height:1,background:"rgba(107,0,255,0.2)",marginBottom:14 }}/>
-            <p style={{ color:G,fontSize:14,lineHeight:1.7,margin:0 }}>{c.body}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Trust() {
-  const feats = [
-    { icon:"\u2708\uFE0F",title:"Air-Gapped Citadel",body:"Fully air-gapped for classified/defense. FIPS-aligned, zero cloud dependency." },
-    { icon:"\uD83C\uDFDB\uFE0F",title:"FedRAMP / CMMC Ready",body:"Compliance pathway active. SDVOSB set-aside eligible. CAGE 172W2." },
-    { icon:"\u20BF",title:"Bitcoin-Anchored Proof",body:"Every receipt anchored via OpenTimestamps. Independently verifiable." },
-    { icon:"\u2696\uFE0F",title:"SDVOSB Certified",body:"Service-Disabled Veteran-Owned. Minority-Owned. SDB. Full gov credentials." },
-  ];
-  return (
-    <section style={{ background:BG,padding:"clamp(48px,8vw,100px) clamp(20px,5vw,80px)",textAlign:"center" }}>
-      <div style={{ display:"inline-flex",alignItems:"center",gap:8,background:"rgba(107,0,255,0.15)",border:"1px solid rgba(107,0,255,0.3)",borderRadius:24,padding:"6px 14px",marginBottom:24 }}>
-        <span style={{ color:P2,fontSize:12,fontWeight:600 }}>FOR CISOS & COMPLIANCE TEAMS</span>
-      </div>
-      <h2 style={{ fontSize:"clamp(32px,5vw,56px)",fontWeight:900,color:W,margin:"0 0 16px" }}>AI You Can Audit.</h2>
-      <p style={{ fontSize:17,color:G,lineHeight:1.7,maxWidth:640,margin:"0 auto 48px" }}>
-        Every autonomous action generates an immutable cryptographic receipt {"\u2014"} publicly verifiable on the Bitcoin blockchain.
-      </p>
-      <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 280px), 1fr))",gap:14,maxWidth:1100,margin:"0 auto 40px" }}>
-        {feats.map(f=>(
-          <div key={f.title} style={{ background:"rgba(107,0,255,0.06)",border:"1px solid rgba(107,0,255,0.15)",borderRadius:12,padding:"18px 20px",display:"flex",gap:14,textAlign:"left" }}>
-            <span style={{ fontSize:22,flexShrink:0,marginTop:2 }}>{f.icon}</span>
-            <div>
-              <p style={{ color:W,fontWeight:700,fontSize:14,margin:"0 0 4px" }}>{f.title}</p>
-              <p style={{ color:G,fontSize:12,lineHeight:1.6,margin:0 }}>{f.body}</p>
+    <section id="loop" style={{ background:BG2,padding:"clamp(48px,8vw,100px) clamp(20px,5vw,80px)",borderTop:"1px solid rgba(255,255,255,0.04)" }}>
+      <div style={{ maxWidth:1100,margin:"0 auto" }}>
+        <p style={{ color:ACCENT,fontSize:11,fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",marginBottom:12 }}>03 {"\u00B7"} THE CORE WEDGE</p>
+        <h2 style={{ fontSize:"clamp(32px,5vw,48px)",fontWeight:700,color:W,margin:"0 0 48px",letterSpacing:"-1px" }}>The 20-second autonomous loop.</h2>
+        <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 300px), 1fr))",gap:20 }}>
+          {[
+            { n:"STEP 01",title:"Detect",body:"Ingest telemetry from your existing environment. Map anomalies against 131+ historical incidents using NVIDIA NeMo RAG. No agents to install. No rewrites." },
+            { n:"STEP 02",title:"Fix",body:"Reason to root cause. Execute the precise remediation via SSH, WinRM, or cloud API. Scoped. Sandboxed. Reversible. OctoAI 8-agent engine powered by Nemotron Ultra 253B." },
+            { n:"STEP 03",title:"Prove",tag:"THE NUCLEAR OPTION",body:"Generate a cryptographic receipt. Anchor it to the Bitcoin blockchain via OpenTimestamps. Attach it to your ServiceNow ticket. Math, not promises." },
+          ].map(c=>(
+            <div key={c.n} style={{ background:BG3,border:"1px solid rgba(255,255,255,0.06)",borderRadius:14,padding:"28px 24px" }}>
+              <p style={{ color:TEXT2,fontSize:10,fontWeight:600,letterSpacing:"2px",margin:"0 0 8px" }}>{c.n}</p>
+              <div style={{ display:"flex",alignItems:"center",gap:10,marginBottom:16 }}>
+                <h3 style={{ fontSize:24,fontWeight:700,color:W,margin:0 }}>{c.title}</h3>
+                {c.tag&&<span style={{ background:"rgba(87,94,207,0.15)",border:"1px solid rgba(87,94,207,0.25)",borderRadius:4,padding:"2px 8px",fontSize:9,fontWeight:700,color:ACCENT,letterSpacing:"1px" }}>{c.tag}</span>}
+              </div>
+              <p style={{ color:TEXT,fontSize:13,lineHeight:1.7,margin:0 }}>{c.body}</p>
             </div>
-          </div>
-        ))}
-      </div>
-      <div style={{ display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap" }}>
-        <a href="https://whitepaper.itechsmart.dev" target="_blank" rel="noopener noreferrer" style={{ background:"rgba(255,255,255,0.05)",color:W,border:"1px solid rgba(255,255,255,0.15)",borderRadius:10,padding:"12px 24px",fontSize:14,fontWeight:600,textDecoration:"none" }}>Read the Whitepaper</a>
-        <a href="https://verify.itechsmart.dev" target="_blank" rel="noopener noreferrer" style={{ background:P,color:W,borderRadius:10,padding:"12px 24px",fontSize:14,fontWeight:600,textDecoration:"none" }}>View Live Ledger {"\u2192"}</a>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
+/* ── TRUST ────────────────────────────────────────────────────────────────── */
+function Trust() {
+  return (
+    <section id="trust" style={{ background:BG,padding:"clamp(48px,8vw,100px) clamp(20px,5vw,80px)",borderTop:"1px solid rgba(255,255,255,0.04)" }}>
+      <div style={{ maxWidth:1100,margin:"0 auto" }}>
+        <p style={{ color:ACCENT,fontSize:11,fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",marginBottom:12 }}>04 {"\u00B7"} TRUST & COMPLIANCE ANCHOR</p>
+        <h2 style={{ fontSize:"clamp(32px,5vw,48px)",fontWeight:700,color:W,margin:"0 0 12px",letterSpacing:"-1px" }}>AI you can audit.</h2>
+        <p style={{ fontSize:15,color:TEXT,lineHeight:1.7,maxWidth:600,margin:"0 0 32px" }}>
+          Every autonomous action generates an immutable cryptographic receipt {"\u2014"} publicly verifiable at <a href="https://verify.itechsmart.dev" target="_blank" rel="noopener noreferrer" style={{ color:ACCENT,textDecoration:"none" }}>verify.itechsmart.dev</a>.
+        </p>
+        <div style={{ display:"flex",gap:14,flexWrap:"wrap",marginBottom:40 }}>
+          <a href="https://whitepaper.itechsmart.dev" target="_blank" rel="noopener noreferrer" style={{ color:TEXT,border:"1px solid rgba(255,255,255,0.1)",borderRadius:8,padding:"11px 22px",fontSize:13,fontWeight:500,textDecoration:"none" }}>Read the Whitepaper {"\u2197"}</a>
+          <a href="https://itechsmart.dev/proof" target="_blank" rel="noopener noreferrer" style={{ background:ACCENT,color:W,borderRadius:8,padding:"11px 22px",fontSize:13,fontWeight:600,textDecoration:"none" }}>View Live Ledger</a>
+        </div>
+        <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 300px), 1fr))",gap:14,marginBottom:32 }}>
+          {[
+            { icon:"\u2708\uFE0F",title:"Citadel Deployment",body:"Air-gapped option. FIPS-aligned. Zero cloud dependency." },
+            { icon:"\uD83C\uDFDB\uFE0F",title:"Compliance Ready",body:"FedRAMP / CMMC pathway active. CAGE 172W2." },
+            { icon:"\u2713",title:"Verified Status",body:"SDVOSB. Minority-Owned. SDB. Full gov credentials." },
+          ].map(f=>(
+            <div key={f.title} style={{ background:BG2,border:"1px solid rgba(255,255,255,0.06)",borderRadius:12,padding:"20px",display:"flex",gap:14,alignItems:"flex-start" }}>
+              <span style={{ fontSize:20,flexShrink:0 }}>{f.icon}</span>
+              <div>
+                <p style={{ color:W,fontWeight:600,fontSize:14,margin:"0 0 4px" }}>{f.title} <span style={{ color:GREEN,fontSize:11 }}>{"\u2713"}</span></p>
+                <p style={{ color:TEXT2,fontSize:12,lineHeight:1.6,margin:0 }}>{f.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{ background:BG2,border:"1px solid rgba(255,255,255,0.06)",borderRadius:10,padding:"14px 20px",display:"inline-flex",alignItems:"center",gap:10 }}>
+          <span style={{ color:TEXT2,fontSize:10,fontWeight:600,letterSpacing:"1px" }}>LATEST ANCHOR</span>
+          <code style={{ color:ACCENT,fontSize:11 }}>btc:871204:9f3c4d8a2b1e7c5f9a3b6d2e8c1f4a7b09e5d3c8ab17</code>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── ONBOARDING ───────────────────────────────────────────────────────────── */
 function Onboarding() {
   return (
-    <section style={{ background:BG2,padding:"clamp(48px,8vw,100px) clamp(20px,5vw,80px)",textAlign:"center" }}>
-      <div style={{ display:"inline-flex",alignItems:"center",gap:8,background:"rgba(43,217,140,0.12)",border:"1px solid rgba(43,217,140,0.3)",borderRadius:24,padding:"6px 14px",marginBottom:24 }}>
-        <span style={{ color:GR,fontSize:12,fontWeight:600 }}>ZERO-RISK ENTRY POINT</span>
-      </div>
-      <h2 style={{ fontSize:"clamp(28px,4vw,50px)",fontWeight:900,color:W,margin:"0 0 16px" }}>Prove It In Your Environment Today.</h2>
-      <p style={{ fontSize:17,color:G,lineHeight:1.7,maxWidth:640,margin:"0 auto 36px" }}>
-        Start with a zero-risk deployment. Connect one telemetry source. Watch the intelligence engine map fixes before you ever grant execution permissions.
-      </p>
-      <div style={{ display:"flex",alignItems:"center",justifyContent:"center",gap:10,marginBottom:36,flexWrap:"wrap" }}>
-        {["1  Connect telemetry","\u2192","2  Watch classifications","\u2192","3  Grant execution"].map((s,i)=>(
-          <span key={i} style={s==="\u2192"?{color:"rgba(107,0,255,0.5)",fontSize:18,fontWeight:700}:{background:"rgba(107,0,255,0.1)",border:"1px solid rgba(107,0,255,0.2)",borderRadius:20,padding:"7px 16px",color:W,fontSize:13,fontWeight:500}}>{s}</span>
-        ))}
-      </div>
-      <div style={{ display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap" }}>
-        <a href="https://itechsmart.dev/pulse" target="_blank" rel="noopener noreferrer" style={{ background:GR,color:"#031a0e",borderRadius:10,padding:"14px 28px",fontSize:15,fontWeight:700,textDecoration:"none" }}>Deploy Free Pulse Scanner {"\u2192"}</a>
-        <a href="https://calendly.com/djuane-itechsmart/new-meeting" target="_blank" rel="noopener noreferrer" style={{ background:"rgba(255,255,255,0.05)",color:W,border:"1px solid rgba(255,255,255,0.15)",borderRadius:10,padding:"14px 28px",fontSize:15,fontWeight:600,textDecoration:"none" }}>Book a Demo</a>
+    <section id="deploy" style={{ background:BG2,padding:"clamp(48px,8vw,100px) clamp(20px,5vw,80px)",borderTop:"1px solid rgba(255,255,255,0.04)" }}>
+      <div style={{ maxWidth:900,margin:"0 auto" }}>
+        <p style={{ color:ACCENT,fontSize:11,fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",marginBottom:12 }}>05 {"\u00B7"} FRICTIONLESS ONBOARDING</p>
+        <h2 style={{ fontSize:"clamp(28px,4vw,44px)",fontWeight:700,color:W,margin:"0 0 12px",letterSpacing:"-1px" }}>Prove it in your environment today.</h2>
+        <p style={{ fontSize:15,color:TEXT,lineHeight:1.7,maxWidth:560,margin:"0 0 36px" }}>
+          Start with a zero-risk deployment. Read-only mode by default. We classify and map fixes {"\u2014"} you decide when to grant execution.
+        </p>
+        <div style={{ display:"flex",flexDirection:"column",gap:16,marginBottom:36 }}>
+          {[
+            ["01","Connect telemetry","Wazuh, Datadog, Splunk, or Prometheus. One integration. Five minutes."],
+            ["02","Map your fixes","The engine builds a remediation graph of your environment. Read-only."],
+            ["03","Grant execution","Only when you{'\u2019'}re ready. Scoped permissions. Full audit trail."],
+          ].map(([n,title,body])=>(
+            <div key={n} style={{ display:"flex",gap:16,alignItems:"flex-start" }}>
+              <span style={{ color:ACCENT,fontSize:12,fontWeight:700,fontFamily:"monospace",minWidth:24,paddingTop:2 }}>{n}</span>
+              <div>
+                <p style={{ color:W,fontWeight:600,fontSize:14,margin:"0 0 4px" }}>{title}</p>
+                <p style={{ color:TEXT2,fontSize:13,lineHeight:1.6,margin:0 }}>{body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{ display:"flex",gap:14,flexWrap:"wrap" }}>
+          <a href="https://itechsmart.dev/pulse" target="_blank" rel="noopener noreferrer" style={{ background:ACCENT,color:W,borderRadius:8,padding:"13px 28px",fontSize:14,fontWeight:600,textDecoration:"none" }}>Deploy Free Pulse Scanner {"\u2192"}</a>
+          <a href="https://calendly.com/djuane-itechsmart/new-meeting" target="_blank" rel="noopener noreferrer" style={{ color:TEXT,border:"1px solid rgba(255,255,255,0.1)",borderRadius:8,padding:"13px 28px",fontSize:14,fontWeight:500,textDecoration:"none" }}>Book a Demo</a>
+        </div>
+        <p style={{ color:TEXT2,fontSize:11,marginTop:12 }}>No credit card required</p>
       </div>
     </section>
   );
 }
 
+/* ── FOOTER ───────────────────────────────────────────────────────────────── */
 function Footer() {
-  const cols = [
-    { t:"PLATFORM",links:[["Main Platform","https://itechsmart.dev"],["Free Pulse Scanner","https://itechsmart.dev/pulse"],["Break-It Challenge","https://itechsmart.dev/break-it"],["Integrations","https://itechsmart.dev/integrations"],["Pricing","https://itechsmart.dev/pricing"],["Pitch Deck","https://itechsmart.dev/pitch-deck"]] },
-    { t:"PROOF & TRUST",links:[["Verify a Receipt","https://verify.itechsmart.dev"],["ProofLink Ledger","https://itechsmart.dev/proof"],["Bitcoin Verification","https://opentimestamps.org"],["Credibility","https://itechsmart.dev/credibility"],["Public API Docs","https://api.itechsmart.dev/docs"],["API Health","https://api.itechsmart.dev/v1/health"]] },
-    { t:"RESOURCES",links:[["Whitepaper v3.6","https://whitepaper.itechsmart.dev"],["Changelog","https://itechsmart.dev/changelog"],["Blog","https://itechsmart.dev/blog"],["State of Autonomous IT","https://itechsmart.dev/state-of-autonomous-it-2026"],["Security","https://itechsmart.dev/security"],["FAQ","https://itechsmart.dev/faq"]] },
-    { t:"COMPANY",links:[["About","https://itechsmart.dev/about"],["Press Release","https://itechsmart.dev/press-release"],["Executive Bios","https://itechsmart.dev/news/executive-bios"],["News","https://itechsmart.dev/news"],["Contact","https://itechsmart.dev/contact"],["Book a Call","https://calendly.com/djuane-itechsmart/new-meeting"]] },
-  ];
   return (
-    <footer style={{ background:BG2,borderTop:"1px solid rgba(107,0,255,0.2)",padding:"clamp(32px,5vw,60px) clamp(20px,5vw,80px) clamp(24px,3vw,40px)" }}>
-      <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(min(100%, 200px), 1fr))",gap:"clamp(20px,3vw,40px)",marginBottom:40 }}>
-        {cols.map(c=>(
-          <div key={c.t}>
-            <p style={{ color:P2,fontSize:10,fontWeight:700,letterSpacing:"1.5px",margin:"0 0 14px" }}>{c.t}</p>
-            {c.links.map(([l,h])=>(
-              <a key={l} href={h} target="_blank" rel="noopener noreferrer" style={{ display:"block",color:G,fontSize:12,textDecoration:"none",marginBottom:9,lineHeight:1.4 }}>{l}</a>
-            ))}
+    <footer style={{ background:BG,borderTop:"1px solid rgba(255,255,255,0.04)",padding:"clamp(32px,5vw,48px) clamp(20px,5vw,80px)" }}>
+      <div style={{ maxWidth:1100,margin:"0 auto",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16 }}>
+        <div style={{ display:"flex",alignItems:"center",gap:14 }}>
+          <img src="/itechsmart_icon.png" alt="iTechSmart" width={20} height={20} style={{ borderRadius:"50%" }} />
+          <div>
+            <span style={{ color:W,fontWeight:600,fontSize:14 }}>iTechSmart Inc.</span>
+            <p style={{ color:TEXT2,fontSize:10,margin:"2px 0 0",letterSpacing:"0.5px" }}>UAIO {"\u2014"} Unified Autonomous IT Operations</p>
           </div>
-        ))}
-      </div>
-      <div style={{ borderTop:"1px solid rgba(107,0,255,0.15)",paddingTop:24,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16 }}>
-        <div style={{ display:"flex",alignItems:"center",gap:16,flexWrap:"wrap" }}>
-          <div style={{ display:"flex",alignItems:"center",gap:7 }}>
-            <img src="/itechsmart_icon.png" alt="iTechSmart" width={22} height={22} style={{ borderRadius:"50%" }} />
-            <span style={{ color:W,fontWeight:700,fontSize:14 }}>iTechSmart Inc.</span>
-          </div>
-          <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer">
-            <img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception Program" style={{ height:20,width:"auto" }} />
-          </a>
         </div>
-        <p style={{ color:"rgba(139,145,154,0.5)",fontSize:11,margin:0 }}>SDVOSB {"\u00B7"} CAGE: 172W2 {"\u00B7"} UEI: ZCPFX4N86G36 {"\u00B7"} F6S #6 {"\u00B7"} {"\u00A9"} 2026 iTechSmart Inc.</p>
+        <div style={{ display:"flex",alignItems:"center",gap:16,flexWrap:"wrap" }}>
+          {[["Platform","https://itechsmart.dev"],["Whitepaper","https://whitepaper.itechsmart.dev"],["Verify","https://verify.itechsmart.dev"],["API","https://api.itechsmart.dev/docs"],["News","https://itechsmart.dev/news"],["Contact","https://itechsmart.dev/contact"]].map(([l,h])=>(
+            <a key={l} href={h} target="_blank" rel="noopener noreferrer" style={{ color:TEXT2,fontSize:11,textDecoration:"none" }}>{l}</a>
+          ))}
+        </div>
+        <div style={{ display:"flex",alignItems:"center",gap:12 }}>
+          <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer"><img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception" style={{ height:18,width:"auto" }} /></a>
+          <span style={{ color:TEXT2,fontSize:10 }}>CAGE 172W2 {"\u00B7"} SDVOSB {"\u00B7"} SDB {"\u00B7"} {"\u00A9"} 2026</span>
+        </div>
       </div>
     </footer>
   );
 }
 
+/* ── PAGE ─────────────────────────────────────────────────────────────────── */
 export default function HomePage() {
   return (
-    <main style={{ background:BG,fontFamily:"'Inter',system-ui,sans-serif",margin:0,padding:0,overflowX:"hidden" }}>
+    <main style={{ background:BG,fontFamily:"'Inter',system-ui,-apple-system,sans-serif",margin:0,padding:0,overflowX:"hidden",color:TEXT }}>
       <Nav/>
       <Hero/>
       <Integration/>
