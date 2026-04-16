@@ -17,7 +17,7 @@ function Nav() {
     <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:100,background:"rgba(5,5,15,0.88)",backdropFilter:"blur(12px)",borderBottom:"1px solid rgba(107,0,255,0.15)",height:64,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 clamp(16px,4vw,80px)" }}>
       <div style={{ display:"flex",alignItems:"center",gap:12 }}>
         <a href="/" style={{ display:"flex",alignItems:"center",gap:8,textDecoration:"none" }}>
-          <svg width="24" height="24" viewBox="0 0 100 100" fill="none"><path d="M50 5 L61 38 L95 38 L68 59 L79 92 L50 71 L21 92 L32 59 L5 38 L39 38 Z" stroke={P} strokeWidth="6" fill="none" strokeLinejoin="round"/></svg>
+          <img src="/itechsmart_icon.png" alt="iTechSmart" width={28} height={28} style={{ borderRadius:"50%" }} />
           <span style={{ color:W,fontWeight:700,fontSize:17 }}>iTechSmart</span>
         </a>
         <div style={{ display:"flex",alignItems:"center",gap:5,background:"#111",border:"1px solid rgba(118,185,0,0.4)",borderRadius:5,padding:"3px 8px" }}>
@@ -221,7 +221,7 @@ function Footer() {
       <div style={{ borderTop:"1px solid rgba(107,0,255,0.15)",paddingTop:24,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16 }}>
         <div style={{ display:"flex",alignItems:"center",gap:16,flexWrap:"wrap" }}>
           <div style={{ display:"flex",alignItems:"center",gap:7 }}>
-            <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><path d="M50 5 L61 38 L95 38 L68 59 L79 92 L50 71 L21 92 L32 59 L5 38 L39 38 Z" stroke="#6b00ff" strokeWidth="7" fill="none" strokeLinejoin="round"/></svg>
+            <img src="/itechsmart_icon.png" alt="iTechSmart" width={22} height={22} style={{ borderRadius:"50%" }} />
             <span style={{ color:W,fontWeight:700,fontSize:14 }}>iTechSmart Inc.</span>
           </div>
           <div style={{ display:"flex",alignItems:"center",gap:5,background:"#111",border:"1px solid rgba(118,185,0,0.4)",borderRadius:5,padding:"3px 8px" }}>
