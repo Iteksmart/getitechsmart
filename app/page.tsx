@@ -30,7 +30,7 @@ function Nav() {
         <a href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer"><img src="/nvidia-inception-badge.svg" alt="NVIDIA Inception" style={{ height:18,width:"auto" }} /></a>
         <a href="https://calendly.com/djuane-itechsmart/new-meeting" target="_blank" rel="noopener noreferrer" className="nc" style={{ background:ACCENT,color:W,borderRadius:6,padding:"7px 16px",fontSize:12,fontWeight:600,textDecoration:"none",letterSpacing:"0.3px" }}>Book a Demo</a>
       </div>
-      <button onClick={()=>setOpen(!open)} className="nb" style={{ display:"none",background:"none",border:`1px solid rgba(255,255,255,0.1)`,borderRadius:6,padding:"6px 10px",color:W,fontSize:16,cursor:"pointer" }}>{open?"\u2715":"\u2630"}</button>
+      <button onClick={()=>setOpen(!open)} className="nb" style={{ display:"none",background:"none",border:`1px solid rgba(255,255,255,0.1)`,borderRadius:6,padding:"6px 12px",color:W,fontSize:16,cursor:"pointer",marginRight:4 }}>{open?"\u2715":"\u2630"}</button>
       {open&&<div style={{ position:"absolute",top:56,left:0,right:0,background:BG2,borderBottom:"1px solid rgba(255,255,255,0.04)",padding:20,display:"flex",flexDirection:"column",gap:16 }}>
         {[["Integration","#integration"],["The Loop","#loop"],["Trust","#trust"],["Deploy","#deploy"],["API","https://api.itechsmart.dev/docs"]].map(([l,h])=>(
           <a key={l} href={h} onClick={()=>setOpen(false)} style={{ color:TEXT,fontSize:14,textDecoration:"none" }}>{l}</a>
