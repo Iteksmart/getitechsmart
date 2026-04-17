@@ -47,6 +47,29 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "iTechSmart Inc.",
+          "description": "Unified Autonomous IT Operations \u2014 detect, fix, and cryptographically prove infrastructure issue resolution in under 20 seconds.",
+          "url": "https://itechsmart.dev",
+          "logo": "https://itechsmart.dev/itechsmart_icon.png",
+          "foundingDate": "2022",
+          "areaServed": "US",
+          "slogan": "Stop Triaging. Start Executing.",
+          "sameAs": [
+            "https://www.linkedin.com/company/itechsmart",
+            "https://twitter.com/itechsmart",
+            "https://www.f6s.com/itechsmart-inc"
+          ],
+          "memberOf": {"@type": "Organization", "name": "NVIDIA Inception Program"},
+          "award": "F6S #6 Globally out of 2M+ AI startups",
+          "identifier": [
+            {"@type": "PropertyValue", "name": "CAGE", "value": "172W2"},
+            {"@type": "PropertyValue", "name": "UEI", "value": "ZCPFX4N86G36"}
+          ],
+          "contactPoint": {"@type": "ContactPoint", "email": "info@itechsmart.dev", "contactType": "sales"}
+        })}} />
       </head>
       <body style={{ margin: 0, padding: 0, background: "#050510", color: "#e8e0ff" }}>
         {children}
