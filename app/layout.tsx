@@ -58,9 +58,16 @@ export default function RootLayout({
           "areaServed": "US",
           "slogan": "Stop Triaging. Start Executing.",
           "sameAs": [
-            "https://www.linkedin.com/company/itechsmart",
-            "https://twitter.com/itechsmart",
-            "https://www.f6s.com/itechsmart-inc"
+            "https://www.linkedin.com/company/itechsmart.dev",
+            "https://x.com/itechsmartdev",
+            "https://youtube.com/@itechsmart-inc",
+            "https://www.instagram.com/itechsmartdev/",
+            "https://www.facebook.com/p/Itechsmartdev-61578925821334/",
+            "https://www.tiktok.com/@itechsmartdev",
+            "https://www.crunchbase.com/organization/itechsmart",
+            "https://www.f6s.com/itechsmart-inc",
+            "https://www.g2.com/products/itechsmart",
+            "https://app.qwoted.com/sources/djuane-jackson"
           ],
           "memberOf": {"@type": "Organization", "name": "NVIDIA Inception Program"},
           "award": "F6S #6 Globally out of 2M+ AI startups",
