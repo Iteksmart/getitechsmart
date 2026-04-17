@@ -46,6 +46,22 @@ function Nav() {
 function Hero() {
   const [ci, setCi] = useState(0);
   const [show, setShow] = useState(true);
+  const TYPED = "And Proves It.";
+  const [typed, setTyped] = useState("");
+  const [doneOnce, setDoneOnce] = useState(false);
+
+  // Typing animation on mount
+  useEffect(() => {
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setTyped(TYPED.slice(0, i));
+      if (i >= TYPED.length) { clearInterval(id); setDoneOnce(true); }
+    }, 80);
+    return () => clearInterval(id);
+  }, []);
+
+  // Cycling words
   useEffect(() => {
     const t = setInterval(() => {
       setShow(false);
@@ -53,16 +69,19 @@ function Hero() {
     }, 2800);
     return () => clearInterval(t);
   }, []);
+
   return (
     <section style={{ background:BG,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"clamp(100px,14vh,140px) clamp(20px,5vw,80px) 0",position:"relative",minHeight:"100vh" }}>
       <h1 style={{ fontSize:"clamp(36px,6.5vw,68px)",fontWeight:700,color:W,lineHeight:1.08,margin:"0 0 6px",letterSpacing:"-2px",maxWidth:800 }}>
         Infrastructure That Fixes Itself.
       </h1>
-      <div style={{ overflow:"hidden",marginBottom:6 }}>
-        <div style={{ transition:"transform 0.35s cubic-bezier(.22,1,.36,1), opacity 0.3s",transform:show?"translateY(0)":"translateY(30px)",opacity:show?1:0 }}>
-          <h1 style={{ fontSize:"clamp(36px,6.5vw,68px)",fontWeight:700,color:ACCENT,lineHeight:1.08,margin:0,letterSpacing:"-2px" }}>And Proves It.</h1>
-        </div>
+      <div style={{ marginBottom:6,minHeight:"1.1em" }}>
+        <h1 style={{ fontSize:"clamp(36px,6.5vw,68px)",fontWeight:700,color:ACCENT,lineHeight:1.08,margin:0,letterSpacing:"-2px",display:"inline" }}>
+          {typed}
+          {!doneOnce && <span style={{ borderRight:`3px solid ${ACCENT}`,marginLeft:2,animation:"blink 0.7s step-end infinite" }}/>}
+        </h1>
       </div>
+      <style>{`@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}`}</style>
       <p style={{ fontSize:"clamp(15px,1.8vw,18px)",color:TEXT,lineHeight:1.7,maxWidth:660,margin:"24px auto 36px" }}>
         The world{"\u2019"}s first verifiable autonomous execution system. We sit on top of your existing tools to detect issues, fix them instantly, and generate cryptographic proof of every action in under 20 seconds.
       </p>
